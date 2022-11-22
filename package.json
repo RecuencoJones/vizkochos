@@ -1,0 +1,31 @@
+{
+  "name": "vizkochos",
+  "productName": "vizkochos",
+  "version": "0.1.0",
+  "main": "src/background/main.js",
+  "scripts": {
+    "start": "concurrently npm:dev:vite npm:dev:electron",
+    "dev:vite": "vite",
+    "dev:electron": "electronmon .",
+    "build:vite": "vite build"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "0.17.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.3",
+    "@types/luxon": "3.1.0",
+    "@vitejs/plugin-vue": "3.2.0",
+    "concurrently": "7.6.0",
+    "electron": "21.3.0",
+    "electronmon": "2.0.2",
+    "luxon": "3.1.0",
+    "sass": "1.56.1",
+    "vite": "3.2.4",
+    "vue": "3.2.45",
+    "vue-router": "4.1.6"
+  },
+  "electronmon": {
+    "patterns": ["!**/db.json"]
+  }
+}
