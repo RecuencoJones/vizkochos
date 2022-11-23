@@ -1,20 +1,20 @@
 <template>
   <aside class="context-sidebar">
     <div>
-      <dl>
-        <dt>Cluster</dt>
-        <dd v-if="config">{{ config.cluster }}</dd>
-        <dd v-else class="text-placeholder"></dd>
-        <dt>User</dt>
-        <dd v-if="config">{{ config.user }}</dd>
-        <dd v-else class="text-placeholder"></dd>
-        <dt>Namespace</dt>
-        <dd v-if="config">{{ config.namespace }}</dd>
-        <dd v-else class="text-placeholder"></dd>
-      </dl>
+      <h4>
+        <router-link :to="'/contexts/' + context">Overview</router-link>
+      </h4>
     </div>
     <div>
-      <router-link :to="'/contexts/' + context">Overview</router-link>
+      <h4>Cluster</h4>
+      <span v-if="config">{{ config.cluster }}</span>
+      <span v-else class="text-placeholder"></span>
+      <h4>User</h4>
+      <span v-if="config">{{ config.user }}</span>
+      <span v-else class="text-placeholder"></span>
+      <h4>Namespace</h4>
+      <span v-if="config">{{ config.namespace }}</span>
+      <span v-else class="text-placeholder"></span>
     </div>
     <div v-for="group of groups" :key="group.name">
       <h4>{{ group.name }}</h4>
@@ -41,7 +41,9 @@ export default {
   },
   methods: {
     async loadConfig() {
-      this.config = await api.getContext(this.context)
+      if (this.context) {
+        this.config = await api.getContext(this.context);
+      }
     }
   },
   watch: {
@@ -57,6 +59,16 @@ export default {
 
 <style lang="scss">
 .context-sidebar {
-  padding-right: 1rem;
+  padding: 0 1rem;
+  background-color: var(--color-sidebar-background);
+
+  h4 {
+    color: var(--color-sidebar-heading);
+    margin-bottom: 0;
+  }
+
+  a, span {
+    color: var(--color-sidebar-link);
+  }
 }
 </style>

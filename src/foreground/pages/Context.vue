@@ -31,9 +31,11 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100%;
+  padding: 0;
 
   &__sidebar {
     flex: 0 0 auto;
+    z-index: 1;
   }
 
   &__main {

@@ -52,9 +52,11 @@ export default {
   height: 1.5rem;
   padding: .25rem 1rem;
   font-size: .85rem;
+  background-color: var(--color-breadcrumb-background);
 
   .crumb {
     padding: 0 .25rem;
+    color: var(--color-breadcrumb-link);
   }
 }
 </style>

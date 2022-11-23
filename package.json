@@ -5,18 +5,27 @@
   "main": "src/background/main.js",
   "scripts": {
     "start": "concurrently npm:dev:vite npm:dev:electron",
-    "dev:vite": "vite",
-    "dev:electron": "electronmon .",
-    "build:vite": "vite build"
+    "prestart:prod": "npm run build:vite",
+    "start:prod": "electron-forge start",
+    "dev:vite": "cross-env MODE=development vite",
+    "dev:electron": "cross-env MODE=development electronmon .",
+    "build:vite": "vite build",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "dependencies": {
-    "@kubernetes/client-node": "0.17.1"
+    "@kubernetes/client-node": "0.17.1",
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "6.0.3",
+    "@electron-forge/cli": "^6.0.3",
+    "@electron-forge/maker-deb": "^6.0.3",
+    "@electron-forge/maker-squirrel": "^6.0.3",
+    "@electron-forge/maker-zip": "^6.0.3",
     "@types/luxon": "3.1.0",
     "@vitejs/plugin-vue": "3.2.0",
     "concurrently": "7.6.0",
+    "cross-env": "7.0.3",
     "electron": "21.3.0",
     "electronmon": "2.0.2",
     "luxon": "3.1.0",
@@ -26,6 +35,8 @@
     "vue-router": "4.1.6"
   },
   "electronmon": {
-    "patterns": ["!**/db.json"]
+    "patterns": [
+      "!**/db.json"
+    ]
   }
 }

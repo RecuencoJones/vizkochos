@@ -1,5 +1,5 @@
 <template>
   <main>
-    Preferences
+    Nothing here – yet
   </main>
 </template>

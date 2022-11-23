@@ -1,0 +1,21 @@
+:root {
+  --color-dark-cookie: #935614;
+  --color-light-cookie: #dbb37e;
+  --color-cream: #fffdd0;
+  --color-glace: #ecece8;
+  --color-chocolate: #9a5327;
+  --color-dark-chocolate: #4e1703;
+  --color-darkest-chocolate: #0f1720;
+
+  --color-header-background: var(--color-dark-cookie);
+  --color-header-title: var(--color-light-cookie);
+  --color-header-link: var(--color-light-cookie);
+  --color-toolbar-background: var(--color-light-cookie);
+  --color-main-background: var(--color-glace);
+  --color-sidebar-background: var(--color-light-cookie);
+  --color-sidebar-heading: var(--color-dark-cookie);
+  --color-sidebar-link: var(--color-dark-chocolate);
+  --color-breadcrumb-background: var(--color-dark-cookie);
+  --color-breadcrumb-link: var(--color-light-cookie);
+  --color-detail-background: var(--color-light-cookie);
+}

@@ -1,88 +1,23 @@
 <template>
-  <section class="resource">
+  <section class="resource toolbar-layout">
     <nav class="toolbar">
       <button @click="handleRefresh">refresh</button>
     </nav>
-    <div class="view">
-      <table v-if="resource === 'pods'">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Containers</th>
-            <th>Status</th>
-            <th>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item of items" :key="item.metadata.uid">
-            <td>{{ item.metadata.name }}</td>
-            <td>{{ item.status.containerStatuses.filter((c) => c.ready).length }}/{{ item.status.containerStatuses.length }}</td>
-            <td>{{ item.status.phase }}</td>
-            <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table v-else-if="resource === 'services'">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Ports</th>
-            <th>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item of items" :key="item.metadata.uid">
-            <td>{{ item.metadata.name }}</td>
-            <td>{{ item.spec.type }}</td>
-            <td>{{ formatPorts(item.spec.ports) }}</td>
-            <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table v-else-if="resource === 'ingresses'">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>URLs</th>
-            <th>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item of items" :key="item.metadata.uid">
-            <td>{{ item.metadata.name }}</td>
-            <td>
-              <template v-for="rule of formatRules(item.spec)" :key="rule">
-                <a :href="rule.url" target="_blank" rel="noopener noreferrer">{{ rule.url }}</a> &rarr; {{ rule.service }}
-                <br/>
-              </template>
-            </td>
-            <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table v-else>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item of items" :key="item.metadata.uid">
-            <td>{{ item.metadata.name }}</td>
-            <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <section class="view">
+      <PodsAdapter v-if="resource === 'pods'" :items="items" @select="handleSelect" />
+      <ServicesAdapter v-else-if="resource === 'services'" :items="items" />
+      <IngressesAdapter v-else-if="resource === 'ingresses'" :items="items" />
+      <DefaultAdapter v-else :items="items" />
+    </section>
+    <ResourceDetail v-if="item" :item="item" @close="item = null" />
   </section>
 </template>
 
 <script>
-import { DateTime } from 'luxon';
 import { useContext } from '../use/context';
 import { useResource } from '../use/resource';
+import { adapters } from '../components/resource-table-adapters'
+import ResourceDetail from '../components/ResourceDetail.vue';
 
 export default {
   setup() {
@@ -91,46 +26,20 @@ export default {
       ...useResource()
     };
   },
+  components: {
+    ...adapters,
+    ResourceDetail
+  },
   data() {
     return {
-      items: null
+      items: null,
+      item: null
     };
   },
   methods: {
-    formatAge(timestamp) {
-      const createdDate = DateTime.fromMillis(Date.parse(timestamp));
-
-      return createdDate.toRelative({ style: 'short' });
-    },
-    formatPorts(ports) {
-      return ports.map((({ port, targetPort, protocol }) => {
-        let value = `${targetPort}/${protocol}`;
-
-        if (port !== targetPort) {
-          value = `${port}:${value}`;
-        }
-
-        return value;
-      })).join(',')
-    },
-    formatRules({ rules, tls }) {
-      const urls = [];
-
-      rules.forEach((rule) => {
-        const isHttps = tls?.some(({ hosts }) => hosts.some((host) => rule.host === host));
-
-        rule.http?.paths.forEach(({ path, backend }) => {
-          urls.push({
-            url: `${ isHttps ? 'https' : 'http' }://${ rule.host }${ path }`,
-            service: `${ backend?.service?.name }:${ backend?.service?.port.number }`
-          });
-        });
-      });
-
-      return urls;
-    },
     async loadResourceItems() {
       this.items = null;
+
       const context = this.context;
       const resource = this.resource;
 
@@ -140,12 +49,16 @@ export default {
     },
     async handleRefresh() {
       await this.loadResourceItems();
+    },
+    handleSelect(item) {
+      this.item = item;
     }
   },
   watch: {
     resource: {
       immediate: true,
       async handler() {
+        this.item = null;
         await this.loadResourceItems();
       }
     }
@@ -154,19 +67,10 @@ export default {
 </script>
 
 <style lang="scss">
-.resource {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .toolbar {
-    flex: 0;
-  }
-
+.resource.toolbar-layout {
   .view {
-    flex: 1;
-    height: 100%;
-    overflow: auto;
+    padding: 0;
+    box-shadow: inset 0 0 3px 0 var(--color-dark-cookie);
   }
 
   table {
@@ -189,7 +93,8 @@ export default {
     }
 
     tbody tr:hover {
-      background: #eee;
+      background: var(--color-cream);
+      cursor: pointer;
     }
   }
 }

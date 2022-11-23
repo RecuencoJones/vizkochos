@@ -2,7 +2,11 @@ const { resolve } = require('path');
 const { app, BrowserWindow, screen } = require('electron');
 const { registerIpcHandlers } = require('./ipc');
 
-const buildDir = resolve(__dirname, '..', '..', 'dist');
+const isDevelopment = process.env.MODE === 'development';
+
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
 
 const createWindow = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -14,11 +18,12 @@ const createWindow = () => {
     }
   });
 
-  if (app.isPackaged) {
-    window.loadFile(resolve(buildDir, 'index.html'));
-  } else {
+  if (isDevelopment) {
     window.loadURL('http://localhost:5173');
     window.webContents.openDevTools();
+  } else {
+    const productionHtml = resolve(__dirname, '..', '..', 'dist', 'index.html')
+    window.loadFile(productionHtml);
   }
 }
 

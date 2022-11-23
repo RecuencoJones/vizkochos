@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld('api', {
     'listContexts',
     'addRecentView',
     'listRecentViews',
-    'listResourceType'
+    'listResourceType',
+    'getContextOverview'
   )
 })

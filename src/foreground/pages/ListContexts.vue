@@ -1,9 +1,11 @@
 <template>
-  <main>
+  <main class="toolbar-layout">
     <nav class="toolbar">
-      <router-link to="/contexts/new">Create context</router-link>
+      <router-link to="/contexts/new">
+        <button>Create context</button>
+      </router-link>
     </nav>
-    <section>
+    <section class="view">
       <h4>Choose context</h4>
       <div v-for="context of contexts" :key="context.name">
         <router-link :to="'/contexts/' + context.name">{{ context.name }}</router-link>
