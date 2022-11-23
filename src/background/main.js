@@ -1,8 +1,7 @@
 const { resolve } = require('path');
 const { app, BrowserWindow, screen } = require('electron');
 const { registerIpcHandlers } = require('./ipc');
-
-const isDevelopment = process.env.MODE === 'development';
+const { isDevelopment } = require('./constants');
 
 if (require('electron-squirrel-startup')) {
   app.quit();

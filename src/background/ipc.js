@@ -66,8 +66,6 @@ function registerIpcHandlers() {
 
     config.loadFromFile(resolve(kubeconfig));
 
-    console.log(kubeconfig)
-
     return config.getUsers().map((user) => user.name);
   });
 
