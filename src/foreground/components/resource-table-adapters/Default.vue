@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item of items" :key="item.metadata.uid">
+      <tr v-for="item of items" :key="item.metadata.uid" @click="handleSelect(item)">
         <td>{{ item.metadata.name }}</td>
         <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
       </tr>
@@ -21,7 +21,10 @@ import { formatAge } from './shared';
 export default {
   props: [ 'items' ],
   methods: {
-    formatAge
+    formatAge,
+    handleSelect(item) {
+      this.$emit('select', item);
+    }
   }
 }
 </script>

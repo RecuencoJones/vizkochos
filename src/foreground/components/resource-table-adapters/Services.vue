@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item of items" :key="item.metadata.uid">
+      <tr v-for="item of items" :key="item.metadata.uid" @click="handleSelect(item)">
         <td>{{ item.metadata.name }}</td>
         <td>{{ item.spec.type }}</td>
         <td>{{ formatPorts(item.spec.ports) }}</td>
@@ -36,6 +36,9 @@ export default {
 
         return value;
       })).join(',')
+    },
+    handleSelect(item) {
+      this.$emit('select', item);
     }
   }
 }

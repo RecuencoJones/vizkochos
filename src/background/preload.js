@@ -19,5 +19,13 @@ contextBridge.exposeInMainWorld('api', {
     'listRecentViews',
     'listResourceType',
     'getContextOverview'
-  )
+  ),
+  async subscribeToContainerLogs(contextName, podName, containerName, fn) {
+    ipcRenderer.on(`logs:${ podName }:${ containerName }`, fn);
+    await ipcRenderer.invoke('subscribeToContainerLogs', contextName, podName, containerName);
+  },
+  async unsubscribeFromContainerLogs(contextName, podName, containerName) {
+    ipcRenderer.removeAllListeners(`logs:${ podName }:${ containerName }`);
+    await ipcRenderer.invoke('unsubscribeFromContainerLogs', contextName, podName, containerName);
+  }
 })

@@ -5,9 +5,9 @@
     </nav>
     <section class="view">
       <PodsAdapter v-if="resource === 'pods'" :items="items" @select="handleSelect" />
-      <ServicesAdapter v-else-if="resource === 'services'" :items="items" />
-      <IngressesAdapter v-else-if="resource === 'ingresses'" :items="items" />
-      <DefaultAdapter v-else :items="items" />
+      <ServicesAdapter v-else-if="resource === 'services'" :items="items" @select="handleSelect" />
+      <IngressesAdapter v-else-if="resource === 'ingresses'" :items="items" @select="handleSelect" />
+      <DefaultAdapter v-else :items="items" @select="handleSelect" />
     </section>
     <ResourceDetail v-if="item" :item="item" @close="item = null" />
   </section>

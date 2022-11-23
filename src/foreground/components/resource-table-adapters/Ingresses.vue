@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item of items" :key="item.metadata.uid">
+      <tr v-for="item of items" :key="item.metadata.uid" @click="handleSelect(item)">
         <td>{{ item.metadata.name }}</td>
         <td>
           <template v-for="rule of formatRules(item.spec)" :key="rule">
@@ -44,6 +44,9 @@ export default {
       });
 
       return urls;
+    },
+    handleSelect(item) {
+      this.$emit('select', item);
     }
   }
 }

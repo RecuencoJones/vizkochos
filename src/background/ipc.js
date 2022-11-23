@@ -4,7 +4,9 @@ const { readdir } = require('fs/promises');
 const { ipcMain } = require('electron');
 const { KubeConfig, CoreV1Api, BatchV1Api, AppsV1Api, NetworkingV1Api, RbacAuthorizationV1Api } = require('@kubernetes/client-node');
 const { getDB, saveDB } = require('./db');
+const { loadKubeConfig } = require('./kubernetes');
 const { methodForResourceType, apiForResourceType } = require('./mappings');
+const { getLogEmitter, stopLogEmitter } = require('./logs');
 
 const kubeDir = resolve(homedir(), '.kube');
 
@@ -17,18 +19,6 @@ async function getContextForName(name) {
   }
 
   return context;
-}
-
-function loadKubeConfig(context) {
-  const config = new KubeConfig();
-  config.loadFromFile(resolve(context.config));
-
-  const cluster = config.getCluster(context.cluster);
-  const user = config.getUser(context.user);
-
-  config.loadFromClusterAndUser(cluster, user);
-
-  return config;
 }
 
 function hoistOrUnshift(array, item, keyOf) {
@@ -99,7 +89,7 @@ function registerIpcHandlers() {
 
   ipcMain.handle('listResourceType', async (event, contextName, resourceType) => {
     const context = await getContextForName(contextName);
-    const config = loadKubeConfig(context);
+    const config = await loadKubeConfig(context);
 
     const client = config.makeApiClient(apiForResourceType[resourceType]);
 
@@ -128,7 +118,7 @@ function registerIpcHandlers() {
 
   ipcMain.handle('getContextOverview', async (event, contextName) => {
     const context = await getContextForName(contextName);
-    const config = loadKubeConfig(context);
+    const config = await loadKubeConfig(context);
 
     const coreClient = config.makeApiClient(CoreV1Api);
     const appsClient = config.makeApiClient(AppsV1Api);
@@ -164,6 +154,25 @@ function registerIpcHandlers() {
       services, ingresses, networkpolicies,
       serviceaccounts, roles, rolebindings
     };
+  });
+
+  ipcMain.handle('subscribeToContainerLogs', async (event, contextName, podName, containerName) => {
+    const context = await getContextForName(contextName);
+    const emitter = await getLogEmitter(context, podName, containerName);
+
+    console.log('subscribe to', `logs:${ context.namespace }:${ podName }:${ containerName }`);
+
+    emitter.on('data', (data) => {
+      event.sender.send(`logs:${ podName }:${ containerName }`, data);
+    });
+  });
+
+  ipcMain.handle('unsubscribeFromContainerLogs', async (event, contextName, podName, containerName) => {
+    const context = await getContextForName(contextName);
+
+    console.log('unsubscribe from', `logs:${ context.namespace }:${ podName }:${ containerName }`);
+
+    stopLogEmitter(context, podName, containerName);
   });
 }
 
