@@ -3,7 +3,7 @@ name: Generate Binaries
 on:
   release:
     types:
-      - released
+      - published
 
 jobs:
   publish:
