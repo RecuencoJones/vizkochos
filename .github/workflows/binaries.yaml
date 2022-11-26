@@ -16,6 +16,8 @@ jobs:
     name: Generate binaries for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: sudo apt-get install -y rpm
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
