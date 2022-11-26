@@ -1,0 +1,32 @@
+name: Generate Binaries
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: macos-latest
+          - os: windows-latest
+    name: Generate binaries for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci
+      - run: npm run package
+      - run: npm run make
+      - uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          file: out/make/**/*
+          file_glob: true
+          overwrite: true

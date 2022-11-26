@@ -12,6 +12,7 @@
     "build:vite": "vite build",
     "prepackage": "npm run build:vite",
     "package": "electron-forge package",
+    "premake": "npm run build:vite",
     "make": "electron-forge make"
   },
   "dependencies": {
