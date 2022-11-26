@@ -1,4 +1,4 @@
-name: Generate Binaries
+name: Build
 
 on: [push]
 
