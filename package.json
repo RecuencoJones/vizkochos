@@ -1,8 +1,10 @@
 {
   "name": "vizkochos",
   "productName": "vizkochos",
+  "description": "Visual Kubernetes",
   "version": "0.1.0",
   "main": "src/background/main.js",
+  "author": "David Recuenco",
   "scripts": {
     "start": "concurrently npm:dev:vite npm:dev:electron",
     "prestart:prod": "npm run build:vite",
