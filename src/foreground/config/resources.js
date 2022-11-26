@@ -3,6 +3,7 @@ export const resources = [
     name: 'Runtime',
     resources: [
       'pods',
+      'replicasets',
       'deployments',
       'jobs',
       'cronjobs'

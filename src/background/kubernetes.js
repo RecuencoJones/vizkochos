@@ -14,10 +14,11 @@ async function attemptRefreshToken(context) {
 }
 
 async function loadKubeConfig(context) {
-  const config = new KubeConfig();
-  config.loadFromFile(resolve(context.config));
-
   await attemptRefreshToken(context);
+
+  const config = new KubeConfig();
+
+  config.loadFromFile(resolve(context.config));
 
   const cluster = config.getCluster(context.cluster);
   const user = config.getUser(context.user);

@@ -2,11 +2,75 @@
   <section class="resource-detail">
     <button @click="handleClose">close</button>
     <h3>{{ item.metadata.name }}</h3>
-    <details v-if="item.spec.containers" open>
+    <details open>
+      <summary>
+        <strong>Details</strong>
+      </summary>
+      <table>
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td>{{ item.metadata.uid }}</td>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <td>{{ item.metadata.name }}</td>
+          </tr>
+          <tr v-if="item.metadata.labels">
+            <th>Labels</th>
+            <td>
+              <span v-for="(value, label) of item.metadata.labels" :key="label">
+                {{ label }}: {{ value }}<br />
+              </span>
+            </td>
+          </tr>
+          <tr v-if="item.metadata.annotations">
+            <th>Annotations</th>
+            <td>
+              <span v-for="(value, label) of item.metadata.annotations" :key="label">
+                {{ label }}: {{ value }}<br />
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th>Created</th>
+            <td>{{ item.metadata.creationTimestamp }}</td>
+          </tr>
+          <tr v-if="item.status && item.status.phase">
+            <th>Status</th>
+            <td>{{ item.status.phase }}</td>
+          </tr>
+          <tr v-if="item.metadata.ownerReferences">
+            <th>Owner</th>
+            <td>
+              <span v-for="owner of item.metadata.ownerReferences" :key="owner.uid">
+                {{ owner.kind }}: <router-link :to="'/contexts/' + context + '/' + owner.kind.toLowerCase() + 's?item=' + owner.name">{{ owner.name }}</router-link><br />
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+    <details v-if="item.spec && item.spec.containers" open>
       <summary>
         <strong>Logs</strong>
       </summary>
-      <pre><span v-for="(entry, index) in logs" :key="index">{{ entry }}</span></pre>
+      <pre class="logs" ref="logs"><span v-for="(entry, index) in logs" :key="index">{{ entry }}</span></pre>
+    </details>
+    <details v-if="item.data" open>
+      <summary>
+        <strong>
+          Data
+        </strong>
+      </summary>
+      <table>
+        <tbody>
+          <tr v-for="(value, key) of item.data" :key="key">
+            <th>{{ key }}</th>
+            <td>{{ value }}</td>
+          </tr>
+        </tbody>
+      </table>
     </details>
     <details>
       <summary>
@@ -23,7 +87,9 @@ import { useContext } from '../use/context';
 
 export default {
   setup() {
-    return useContext();
+    return {
+      ...useContext()
+    };
   },
   props: [ 'item' ],
   data() {
@@ -33,13 +99,13 @@ export default {
   },
   methods: {
     async init(item) {
-      if (item.spec.containers) {
+      if (item.spec?.containers) {
         await this.subscribeToLogs(item);
       }
     },
 
     async close(item) {
-      if (item.spec.containers) {
+      if (item.spec?.containers) {
         await this.unsubscribeFromLogs(item);
         this.logs = [];
       }
@@ -47,7 +113,7 @@ export default {
 
     async subscribeToLogs(item) {
       await api.subscribeToContainerLogs(this.context, item.metadata.name, item.spec.containers[0].name, (event, text) => {
-        this.logs.push(text);
+        this.logs.unshift(text);
       });
     },
 
@@ -97,6 +163,18 @@ export default {
   background-color: var(--color-detail-background);
   box-shadow: 0 0 3px 0 var(--color-dark-cookie);
 
+  table {
+    padding: .5rem;
+
+    th {
+      text-align: right;
+    }
+
+    td, th {
+      padding: .5rem;
+    }
+  }
+
   pre {
     background-color: var(--color-glace);
     max-height: 25rem;
@@ -104,6 +182,11 @@ export default {
     overflow: auto;
     border: 1px solid black;
     padding: .5rem 1rem;
+  }
+
+  pre.logs {
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   summary {

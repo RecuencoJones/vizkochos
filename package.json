@@ -39,7 +39,8 @@
   },
   "electronmon": {
     "patterns": [
-      "!**/db.json"
+      "!**/db.json",
+      "!src/foreground/**/*"
     ]
   }
 }

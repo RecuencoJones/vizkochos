@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss">
 .context-sidebar {
-  padding: 0 1rem;
+  padding: 0 2rem;
   background-color: var(--color-sidebar-background);
 
   h4 {

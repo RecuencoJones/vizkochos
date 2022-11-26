@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     crumbs() {
-      return this.route.fullPath.split('/').filter(Boolean).reduce((crumbs, next) => {
+      return this.route.path.split('/').filter(Boolean).reduce((crumbs, next) => {
         const lastCrumb = crumbs.at(-1);
         let crumb = { name: next, path: null };
 
