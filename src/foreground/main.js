@@ -39,7 +39,7 @@ const router = createRouter({
       component: Preferences
     }
   ]
-})
+});
 
 const app = createApp(App);
 

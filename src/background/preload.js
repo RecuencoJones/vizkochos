@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron')
+const { contextBridge, ipcRenderer } = require('electron');
 
 const invokify = (name) => (...args) => ipcRenderer.invoke(name, ...args);
 
@@ -28,4 +28,4 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.removeAllListeners(`logs:${ podName }:${ containerName }`);
     await ipcRenderer.invoke('unsubscribeFromContainerLogs', contextName, podName, containerName);
   }
-})
+});

@@ -15,7 +15,7 @@ async function getContextForName(name) {
   const context = db.contexts.find((context) => context.name === name);
 
   if (!context) {
-    throw new Error(`There is no context with name: ${ name }`)
+    throw new Error(`There is no context with name: ${ name }`);
   }
 
   return context;
@@ -109,7 +109,7 @@ function registerIpcHandlers() {
 
     db.recents = db.recents || [];
 
-    hoistOrUnshift(db.recents, view, (view) => view.path)
+    hoistOrUnshift(db.recents, view, (view) => view.path);
 
     db.recents = db.recents.slice(0, 5).filter(Boolean);
 

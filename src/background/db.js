@@ -26,4 +26,4 @@ async function saveDB(data) {
   await writeFile(dbPath, JSON.stringify(data, null, 2), 'utf8');
 }
 
-module.exports = { getDB, saveDB }
+module.exports = { getDB, saveDB };

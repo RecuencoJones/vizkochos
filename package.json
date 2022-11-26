@@ -13,7 +13,8 @@
     "prepackage": "npm run build:vite",
     "package": "electron-forge package",
     "premake": "npm run build:vite",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@kubernetes/client-node": "0.17.1",
@@ -31,6 +32,7 @@
     "cross-env": "7.0.3",
     "electron": "21.3.0",
     "electronmon": "2.0.2",
+    "eslint": "8.28.0",
     "js-yaml": "4.1.0",
     "luxon": "3.1.0",
     "sass": "1.56.1",

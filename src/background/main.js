@@ -21,10 +21,10 @@ const createWindow = () => {
     window.loadURL('http://localhost:5173');
     window.webContents.openDevTools();
   } else {
-    const productionHtml = resolve(__dirname, '..', '..', 'dist', 'index.html')
+    const productionHtml = resolve(__dirname, '..', '..', 'dist', 'index.html');
     window.loadFile(productionHtml);
   }
-}
+};
 
 async function main() {
   await app.whenReady();
