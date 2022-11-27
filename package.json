@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "main": "src/background/main.js",
   "author": "David Recuenco",
+  "license": "MIT",
   "scripts": {
     "start": "concurrently npm:dev:vite npm:dev:electron",
     "prestart:prod": "npm run build:vite",
