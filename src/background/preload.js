@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const { EventEmitter } = require('events');
 
 const invokify = (name) => (...args) => ipcRenderer.invoke(name, ...args);
 
@@ -18,7 +19,10 @@ contextBridge.exposeInMainWorld('api', {
     'addRecentView',
     'listRecentViews',
     'listResourceType',
-    'getContextOverview'
+    'getContextOverview',
+    'getPreferences',
+    'savePreferences',
+    'openGitHubRepository'
   ),
   async subscribeToContainerLogs(contextName, podName, containerName, fn) {
     ipcRenderer.on(`logs:${ podName }:${ containerName }`, fn);
@@ -27,5 +31,16 @@ contextBridge.exposeInMainWorld('api', {
   async unsubscribeFromContainerLogs(contextName, podName, containerName) {
     ipcRenderer.removeAllListeners(`logs:${ podName }:${ containerName }`);
     await ipcRenderer.invoke('unsubscribeFromContainerLogs', contextName, podName, containerName);
+  },
+  subscribeToAppMenuEvents(...eventListeners) {
+    const events = new EventEmitter();
+
+    eventListeners.forEach(({ event, handler }) => {
+      events.on(event, handler);
+    });
+
+    ipcRenderer.on('app-menu-relay', (e, { command, ...data }) => {
+      events.emit(command, data);
+    });
   }
 });

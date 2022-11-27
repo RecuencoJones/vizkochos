@@ -17,7 +17,7 @@
   height: 2rem;
   padding: .25rem 1rem;
   background-color: var(--color-header-background);
-  box-shadow: 0 0 3px 2px var(--color-header-background);
+  box-shadow: 0 0 3px 2px var(--color-box-shadow);
   z-index: 2;
 
   &__left,

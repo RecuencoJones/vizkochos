@@ -2,6 +2,8 @@ const { resolve } = require('path');
 const { app, BrowserWindow, screen } = require('electron');
 const { registerIpcHandlers } = require('./ipc');
 const { isDevelopment } = require('./constants');
+const { setMenu } = require('./menu');
+const { windows } = require('./windows');
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -24,11 +26,14 @@ const createWindow = () => {
     const productionHtml = resolve(__dirname, '..', '..', 'dist', 'index.html');
     window.loadFile(productionHtml);
   }
+
+  windows.set('appWindow', window);
 };
 
 async function main() {
   await app.whenReady();
 
+  setMenu();
   registerIpcHandlers();
   createWindow();
 

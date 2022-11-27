@@ -1,4 +1,5 @@
-:root {
+.theme-default,
+.theme-bizcocho {
   --color-dark-cookie: #935614;
   --color-light-cookie: #dbb37e;
   --color-cream: #fffdd0;
@@ -18,4 +19,87 @@
   --color-breadcrumb-background: var(--color-dark-cookie);
   --color-breadcrumb-link: var(--color-light-cookie);
   --color-detail-background: var(--color-light-cookie);
+  --color-resource-table-header: var(--color-light-cookie);
+  --color-modal-background: var(--color-glace);
+  --color-modal-border: var(--color-chocolate);
+  --color-box-shadow: var(--color-dark-cookie);
+}
+
+.theme-cli {
+  --color-dark: #000000;
+  --color-light: #ffffff;
+  --color-font: #5ff025;
+
+  --color-header-background: var(--color-dark);
+  --color-header-title: var(--color-font);
+  --color-header-link: var(--color-font);
+  --color-toolbar-background: var(--color-dark);
+  --color-main-background: var(--color-dark);
+  --color-main-text: var(--color-font);
+  --color-sidebar-background: var(--color-dark);
+  --color-sidebar-heading: var(--color-font);
+  --color-sidebar-link: var(--color-font);
+  --color-breadcrumb-background: var(--color-dark);
+  --color-breadcrumb-link: var(--color-font);
+  --color-detail-background: var(--color-dark);
+  --color-resource-table-header: var(--color-dark);
+  --color-modal-background: var(--color-dark);
+  --color-modal-border: var(--color-font);
+  --color-box-shadow: var(--color-font);
+}
+
+.theme-plain {
+  --color-dark: #000000;
+  --color-gray: #cccccc;
+  --color-light: #ffffff;
+
+  --color-header-background: unset;
+  --color-header-title: unset;
+  --color-header-link: unset;
+  --color-toolbar-background: unset;
+  --color-main-background: unset;
+  --color-main-text: unset;
+  --color-sidebar-background: unset;
+  --color-sidebar-heading: unset;
+  --color-sidebar-link: unset;
+  --color-breadcrumb-background: unset;
+  --color-breadcrumb-link: unset;
+  --color-detail-background: var(--color-light);
+  --color-resource-table-header: var(--color-light);
+  --color-modal-background: var(--color-light);
+  --color-modal-border: var(--color-dark);
+  --color-box-shadow: var(--color-gray);
+
+  a {
+    color: revert !important;
+    text-decoration: underline;
+  }
+}
+
+.theme-plain--dark {
+  --color-dark: #000000;
+  --color-gray: #cccccc;
+  --color-light: #ffffff;
+  --color-link: #ff7300;
+
+  --color-header-background: unset;
+  --color-header-title: var(--color-link);
+  --color-header-link: var(--color-link);
+  --color-toolbar-background: unset;
+  --color-main-background: var(--color-dark);
+  --color-main-text: var(--color-light);
+  --color-sidebar-background: unset;
+  --color-sidebar-heading: unset;
+  --color-sidebar-link: var(--color-link);
+  --color-breadcrumb-background: unset;
+  --color-breadcrumb-link: var(--color-link);
+  --color-detail-background: var(--color-dark);
+  --color-resource-table-header: var(--color-dark);
+  --color-modal-background: var(--color-dark);
+  --color-modal-border: var(--color-light);
+  --color-box-shadow: var(--color-gray);
+
+  a {
+    text-decoration: underline;
+  }
 }

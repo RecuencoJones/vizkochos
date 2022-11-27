@@ -161,7 +161,7 @@ export default {
   overflow: auto;
   padding: 1rem;
   background-color: var(--color-detail-background);
-  box-shadow: 0 0 3px 0 var(--color-dark-cookie);
+  box-shadow: 0 0 3px 0 var(--color-box-shadow);
 
   table {
     padding: .5rem;

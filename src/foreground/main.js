@@ -45,4 +45,31 @@ const app = createApp(App);
 
 app.use(router);
 
-app.mount('#app');
+const appInstance = app.mount('#app');
+
+window.api.subscribeToAppMenuEvents(
+  {
+    event: 'file:newContext',
+    handler() {
+      router.push('/contexts/new');
+    }
+  },
+  {
+    event: 'file:quickstart',
+    handler() {
+      router.push('/');
+    }
+  },
+  {
+    event: 'file:preferences',
+    handler() {
+      router.push('/preferences');
+    }
+  },
+  {
+    event: 'help:shortcuts',
+    handler() {
+      appInstance.toggleShortcuts();
+    }
+  }
+);

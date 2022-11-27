@@ -1,7 +1,7 @@
 const { homedir } = require('os');
 const { resolve } = require('path');
 const { readdir } = require('fs/promises');
-const { ipcMain } = require('electron');
+const { ipcMain, shell } = require('electron');
 const { KubeConfig, CoreV1Api, BatchV1Api, AppsV1Api, NetworkingV1Api, RbacAuthorizationV1Api } = require('@kubernetes/client-node');
 const { getDB, saveDB } = require('./db');
 const { loadKubeConfig } = require('./kubernetes');
@@ -174,6 +174,25 @@ function registerIpcHandlers() {
 
     stopLogEmitter(context, podName, containerName);
   });
+
+  ipcMain.handle('getPreferences', async () => {
+    const db = await getDB();
+
+    return db.preferences || {};
+  });
+
+  ipcMain.handle('savePreferences', async (event, data) => {
+    const db = await getDB();
+
+    db.preferences = data;
+
+    await saveDB(db);
+  });
+
+  const openGitHubRepository = () => shell.openExternal('https://github.com/RecuencoJones/vizkochos');
+
+  ipcMain.on('openGitHubRepository', openGitHubRepository);
+  ipcMain.handle('openGitHubRepository', openGitHubRepository);
 }
 
 module.exports = { registerIpcHandlers };

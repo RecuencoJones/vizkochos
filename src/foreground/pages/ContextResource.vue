@@ -97,7 +97,7 @@ export default {
 .resource.toolbar-layout {
   .view {
     padding: 0;
-    box-shadow: inset 0 0 3px 0 var(--color-dark-cookie);
+    box-shadow: inset 0 0 3px 0 var(--color-box-shadow);
 
     table {
       width: 100%;
@@ -107,7 +107,7 @@ export default {
       thead th {
         position: sticky;
         top: 0;
-        background: white;
+        background: var(--color-resource-table-header);
       }
 
       th {
