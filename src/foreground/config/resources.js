@@ -1,5 +1,6 @@
 export const resources = [
   {
+    icon: 'bi-boxes',
     name: 'Runtime',
     resources: [
       'pods',
@@ -11,6 +12,7 @@ export const resources = [
   },
   {
     name: 'Configuration',
+    icon: 'bi-gear',
     resources: [
       'configmaps',
       'secrets'
@@ -18,6 +20,7 @@ export const resources = [
   },
   {
     name: 'Connectivity',
+    icon: 'bi-ethernet',
     resources: [
       'services',
       'ingresses',

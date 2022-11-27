@@ -1,8 +1,8 @@
 <template>
   <div class="app-breadcrumb">
-    <router-link class="crumb" to="/">home</router-link>
+    <router-link class="crumb" to="/"><i class="bi-house-fill" /> Home</router-link>
     <template v-for="crumb of crumbs" :key="crumb.path" >
-      <span>&gt;</span>
+      <i class="bi-chevron-right" />
       <router-link class="crumb" :to="crumb.path">
         {{ sanitize(crumb.name) }}
       </router-link>
@@ -49,9 +49,9 @@ export default {
 .app-breadcrumb {
   display: flex;
   align-items: center;
-  height: 1.5rem;
+  height: 2rem;
   padding: .25rem 1rem;
-  font-size: .85rem;
+  font-size: 1rem;
   background-color: var(--color-breadcrumb-background);
 
   .crumb {

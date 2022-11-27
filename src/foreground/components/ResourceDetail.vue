@@ -4,7 +4,7 @@
     <h3>{{ item.metadata.name }}</h3>
     <details open>
       <summary>
-        <strong>Details</strong>
+        <strong><i class="bi-card-list" /> Details</strong>
       </summary>
       <table>
         <tbody>
@@ -53,7 +53,7 @@
     </details>
     <details v-if="item.spec && item.spec.containers" open>
       <summary>
-        <strong>Logs</strong>
+        <strong><i class="bi-justify" /> Logs</strong>
       </summary>
       <pre class="logs" ref="logs"><span v-for="(entry, index) in logs" :key="index">{{ entry }}</span></pre>
     </details>
@@ -74,7 +74,7 @@
     </details>
     <details>
       <summary>
-        <strong>Manifest</strong>
+        <strong><i class="bi-filetype-yml" /> Manifest</strong>
       </summary>
       <pre>{{ toYaml(item) }}</pre>
     </details>
@@ -158,6 +158,7 @@ export default {
   bottom: 0;
   background: white;
   max-width: 50vw;
+  min-width: 35vw;
   overflow: auto;
   padding: 1rem;
   background-color: var(--color-detail-background);

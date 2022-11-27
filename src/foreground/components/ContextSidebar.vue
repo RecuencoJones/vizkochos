@@ -2,23 +2,29 @@
   <aside class="context-sidebar">
     <div>
       <h4>
-        <router-link :to="'/contexts/' + context">Overview</router-link>
+        <router-link :to="'/contexts/' + context"><i class="bi-binoculars" /> Overview</router-link>
       </h4>
     </div>
     <div>
-      <h4>Cluster</h4>
-      <span v-if="config">{{ config.cluster }}</span>
-      <span v-else class="text-placeholder"></span>
-      <h4>User</h4>
-      <span v-if="config">{{ config.user }}</span>
-      <span v-else class="text-placeholder"></span>
-      <h4>Namespace</h4>
-      <span v-if="config">{{ config.namespace }}</span>
-      <span v-else class="text-placeholder"></span>
+      <h4><i class="bi-hdd-rack" /> Cluster</h4>
+      <div class="resource-link">
+        <span v-if="config">{{ config.cluster }}</span>
+        <span v-else class="text-placeholder"></span>
+      </div>
+      <h4><i class="bi-person" /> User</h4>
+      <div class="resource-link">
+        <span v-if="config">{{ config.user }}</span>
+        <span v-else class="text-placeholder"></span>
+      </div>
+      <h4><i class="bi-tag" /> Namespace</h4>
+      <div class="resource-link">
+        <span v-if="config">{{ config.namespace }}</span>
+        <span v-else class="text-placeholder"></span>
+      </div>
     </div>
     <div v-for="group of groups" :key="group.name">
-      <h4>{{ group.name }}</h4>
-      <div v-for="resource of group.resources" :key="resource">
+      <h4><i :class="group.icon" /> {{ group.name }}</h4>
+      <div class="resource-link" v-for="resource of group.resources" :key="resource">
         <router-link :to="'/contexts/' + context + '/' + resource">{{ resource }}</router-link>
       </div>
     </div>
@@ -69,6 +75,10 @@ export default {
 
   a, span {
     color: var(--color-sidebar-link);
+  }
+
+  .resource-link {
+    padding: 0.25rem 0;
   }
 }
 </style>

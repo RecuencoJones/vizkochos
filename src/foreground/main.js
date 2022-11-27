@@ -8,6 +8,7 @@ import AddContext from './pages/AddContext.vue';
 import Context from './pages/Context.vue';
 import ContextOverview from './pages/ContextOverview.vue';
 import ContextResource from './pages/ContextResource.vue';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './styles/global.scss';
 
 const router = createRouter({

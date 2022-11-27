@@ -8,7 +8,7 @@ html, body, #app {
 }
 
 .router-link-exact-active {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 main {
@@ -45,7 +45,7 @@ dl {
   .toolbar {
     flex: 0 0 auto;
     background-color: var(--color-toolbar-background);
-    padding: .5rem;
+    padding: 1rem 2rem;
   }
 
   .view {

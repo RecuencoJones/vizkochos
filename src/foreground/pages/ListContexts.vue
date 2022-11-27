@@ -1,14 +1,12 @@
 <template>
-  <main class="toolbar-layout">
+  <main class="toolbar-layout contexts">
     <nav class="toolbar">
-      <router-link to="/contexts/new">
-        <button>Create context</button>
-      </router-link>
+      <router-link to="/contexts/new"><i class="bi-plus-square-dotted" /> Add context</router-link>
     </nav>
     <section class="view">
       <h4>Choose context</h4>
       <div v-for="context of contexts" :key="context.name">
-        <router-link :to="'/contexts/' + context.name">{{ context.name }}</router-link>
+        <router-link :to="'/contexts/' + context.name"><i class="bi-box" /> {{ context.name }}</router-link>
       </div>
     </section>
   </main>
@@ -31,3 +29,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.contexts {
+
+  .view {
+    padding: 10vh 20vw;
+
+    div {
+      padding: 0.25rem 0;
+    }
+  }
+}
+</style>
