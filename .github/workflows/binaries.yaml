@@ -15,6 +15,8 @@ jobs:
           - os: windows-latest
     name: Generate binaries for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    env:
+      DEBUG: 'electron-forge:*'
     steps:
       - if: ${{ matrix.os == 'ubuntu-latest' }}
         run: sudo apt-get install -y rpm
