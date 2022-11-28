@@ -197,6 +197,7 @@ function registerIpcHandlers() {
 
   ipcMain.on('openGitHubRepository', openGitHubRepository);
   ipcMain.handle('openGitHubRepository', openGitHubRepository);
+  ipcMain.handle('openUrl', (event, url) => shell.openExternal(url));
 }
 
 module.exports = { registerIpcHandlers };

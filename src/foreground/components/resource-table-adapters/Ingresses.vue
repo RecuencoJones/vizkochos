@@ -12,7 +12,7 @@
         <td>{{ item.metadata.name }}</td>
         <td>
           <template v-for="rule of formatRules(item.spec)" :key="rule">
-            <a :href="rule.url" target="_blank" rel="noopener noreferrer">{{ rule.url }}</a> &rarr; {{ rule.service }}
+            <a href="#" @click="openUrl(rule.url)">{{ rule.url }}</a> &rarr; {{ rule.service }}
             <br/>
           </template>
         </td>
@@ -47,6 +47,9 @@ export default {
     },
     handleSelect(item) {
       this.$emit('select', item);
+    },
+    async openUrl(url) {
+      await api.openUrl(url);
     }
   }
 }

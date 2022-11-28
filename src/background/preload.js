@@ -24,6 +24,7 @@ contextBridge.exposeInMainWorld('api', {
     'getContextOverview',
     'getPreferences',
     'savePreferences',
+    'openUrl',
     'openGitHubRepository'
   ),
   async subscribeToContainerLogs(contextName, podName, containerName, fn) {
