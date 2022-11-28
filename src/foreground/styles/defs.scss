@@ -19,7 +19,9 @@
   --color-breadcrumb-background: var(--color-dark-cookie);
   --color-breadcrumb-link: var(--color-light-cookie);
   --color-detail-background: var(--color-light-cookie);
-  --color-resource-table-header: var(--color-light-cookie);
+  --color-resource-table-header-background: var(--color-light-cookie);
+  --color-resource-table-highlight-background: var(--color-cream);
+  --color-resource-table-highlight-text: unset;
   --color-modal-background: var(--color-glace);
   --color-modal-border: var(--color-chocolate);
   --color-box-shadow: var(--color-dark-cookie);
@@ -42,7 +44,10 @@
   --color-breadcrumb-background: var(--color-dark);
   --color-breadcrumb-link: var(--color-font);
   --color-detail-background: var(--color-dark);
-  --color-resource-table-header: var(--color-dark);
+  --color-resource-table-header-background: var(--color-font);
+  --color-resource-table-header-text: var(--color-dark);
+  --color-resource-table-highlight-background: var(--color-font);
+  --color-resource-table-highlight-text: var(--color-dark);
   --color-modal-background: var(--color-dark);
   --color-modal-border: var(--color-font);
   --color-box-shadow: var(--color-font);
@@ -50,7 +55,7 @@
 
 .theme-plain {
   --color-dark: #000000;
-  --color-gray: #cccccc;
+  --color-gray: #dddddd;
   --color-light: #ffffff;
 
   --color-header-background: unset;
@@ -65,7 +70,10 @@
   --color-breadcrumb-background: unset;
   --color-breadcrumb-link: unset;
   --color-detail-background: var(--color-light);
-  --color-resource-table-header: var(--color-light);
+  --color-resource-table-header-background: var(--color-light);
+  --color-resource-table-header-text: unset;
+  --color-resource-table-highlight-background: var(--color-gray);
+  --color-resource-table-highlight-text: unset;
   --color-modal-background: var(--color-light);
   --color-modal-border: var(--color-dark);
   --color-box-shadow: var(--color-gray);
@@ -94,10 +102,13 @@
   --color-breadcrumb-background: unset;
   --color-breadcrumb-link: var(--color-link);
   --color-detail-background: var(--color-dark);
-  --color-resource-table-header: var(--color-dark);
+  --color-resource-table-header-background: var(--color-link);
+  --color-resource-table-header-text: var(--color-dark);
+  --color-resource-table-highlight-background: var(--color-link);
+  --color-resource-table-highlight-text: var(--color-dark);
   --color-modal-background: var(--color-dark);
   --color-modal-border: var(--color-light);
-  --color-box-shadow: var(--color-gray);
+  --color-box-shadow: var(--color-link);
 
   a {
     text-decoration: underline;

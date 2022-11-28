@@ -36,6 +36,7 @@ export default {
   &__sidebar {
     flex: 0 0 auto;
     z-index: 1;
+    min-width: 10rem;
   }
 
   &__main {

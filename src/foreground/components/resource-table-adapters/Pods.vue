@@ -2,10 +2,10 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Containers</th>
-        <th>Status</th>
-        <th>Created</th>
+        <th>{{ $t('page.resource.name') }}</th>
+        <th>{{ $t('page.resource.containers') }}</th>
+        <th>{{ $t('page.resource.status') }}</th>
+        <th>{{ $t('page.resource.created') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -13,7 +13,7 @@
         <td>{{ item.metadata.name }}</td>
         <td>{{ item.status.containerStatuses.filter((c) => c.ready).length }}/{{ item.status.containerStatuses.length }}</td>
         <td>{{ item.status.phase }}</td>
-        <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
+        <td>{{ formatAge(item.metadata.creationTimestamp, $i18n.locale) }}</td>
       </tr>
     </tbody>
   </table>

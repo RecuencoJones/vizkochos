@@ -1,7 +1,10 @@
 <template>
   <header class="app-header">
     <nav class="app-header__left">
-      <router-link class="title" to="/">Vizkochos</router-link>
+      <router-link class="title" to="/">
+        <img class="logo" src="/logo.png">
+        Vizkochos
+      </router-link>
     </nav>
     <nav class="app-header__right">
       <router-link to="/preferences"><i class="bi-sliders" /></router-link>
@@ -22,9 +25,16 @@
   z-index: 2;
 
   .title {
+    display: flex;
+    align-items: center;
     font-weight: bold;
     font-size: 1.5rem;
     color: var(--color-header-title);
+
+    .logo {
+      height: 2rem;
+      margin-right: .25rem;
+    }
   }
 
   a {

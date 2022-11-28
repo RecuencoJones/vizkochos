@@ -1,8 +1,8 @@
 <template>
   <section class="resource toolbar-layout">
     <nav class="toolbar">
-      <button @click="handleRefresh">refresh</button>
-      <input type="text" placeholder="filter" v-model="filter">
+      <button @click="handleRefresh"><i class="bi-arrow-clockwise" /></button>
+      <input type="text" :placeholder="$t('page.resource.filter')" v-model="filter">
     </nav>
     <section class="view">
       <PodsAdapter v-if="resource === 'pods'" :items="filteredItems" @select="handleSelect" />
@@ -107,7 +107,8 @@ export default {
       thead th {
         position: sticky;
         top: 0;
-        background: var(--color-resource-table-header);
+        color: var(--color-resource-table-header-text);
+        background: var(--color-resource-table-header-background);
       }
 
       th {
@@ -119,7 +120,8 @@ export default {
       }
 
       tbody tr:hover {
-        background: var(--color-cream);
+        color: var(--color-resource-table-highlight-text);
+        background: var(--color-resource-table-highlight-background);
         cursor: pointer;
       }
     }

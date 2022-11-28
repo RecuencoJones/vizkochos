@@ -2,26 +2,26 @@
   <main class="quickstart rows">
     <div>
       <section>
-        <h1>Vizkochos</h1>
-        <h3>Visual Kubernetes</h3>
+        <h1>{{ $t('app.name') }}</h1>
+        <h3>{{ $t('app.description') }}</h3>
       </section>
     </div>
     <div class="columns">
       <div>
         <section>
-          <h4><i class="bi-bookmarks" /> Quickstart</h4>
+          <h4><i class="bi-bookmarks" /> {{ $t('page.home.quickstart') }}</h4>
           <div>
-            <router-link to="/contexts/new"><i class="bi-plus-square-dotted" /> Add context</router-link>
+            <router-link to="/contexts/new"><i class="bi-plus-square-dotted" /> {{ $t('page.home.addcontext') }}</router-link>
           </div>
           <div>
-            <router-link to="/contexts"><i class="bi-view-list" /> View contexts</router-link>
+            <router-link to="/contexts"><i class="bi-view-list" /> {{ $t('page.home.viewcontexts') }}</router-link>
           </div>
           <div>
-            <router-link to="/preferences"><i class="bi-sliders" /> Manage preferences</router-link>
+            <router-link to="/preferences"><i class="bi-sliders" /> {{ $t('page.home.managepreferences') }}</router-link>
           </div>
         </section>
         <section>
-          <h4><i class="bi-clock-history" /> Recently viewed</h4>
+          <h4><i class="bi-clock-history" /> {{ $t('page.home.recents') }}</h4>
           <div v-for="(recent, index) of recents" :key="index">
             <router-link :to="recent.path"><i class="bi-box" /> {{ recent.name }}</router-link>
           </div>
@@ -29,14 +29,14 @@
       </div>
       <div>
         <section>
-          <h4><i class="bi-pin-angle" /> Pinned</h4>
+          <h4><i class="bi-pin-angle" /> {{ $t('page.home.pinned') }}</h4>
           <div v-if="pinned"></div>
-          <div v-else><i>Nothing pinned yet</i></div>
+          <div v-else><i>{{ $t('page.home.nothingpinned') }}</i></div>
         </section>
         <section>
-          <h4><i class="bi-info-circle" /> Help</h4>
+          <h4><i class="bi-info-circle" /> {{ $t('page.home.help') }}</h4>
           <div>
-            <a href="#" @click="openGitHubRepository"><i class="bi-github" /> View in GitHub</a>
+            <a href="#" @click="openGitHubRepository"><i class="bi-github" /> {{ $t('page.home.viewingithub') }}</a>
           </div>
         </section>
       </div>

@@ -1,0 +1,106 @@
+{
+  "app": {
+    "name": "Vizkochos",
+    "description": "Visual Kubernetes"
+  },
+  "menu": {
+    "file": {
+      "newcontext": "New Context",
+      "quickstart": "Go to Quickstart",
+      "contexts": "Go to Contexts",
+      "preferences": "Preferences"
+    },
+    "help": {
+      "shortcuts": "View Shortcuts",
+      "openingithub": "Open in GitHub"
+    }
+  },
+  "page": {
+    "home": {
+      "quickstart": "Quickstart",
+      "recents": "Recently viewed",
+      "pinned": "Pinned",
+      "nothingpinned": "Nothing pinned yet",
+      "help": "Help",
+      "addcontext": "Add context",
+      "viewcontexts": "View contexts",
+      "managepreferences": "Manage preferences",
+      "viewingithub": "View in GitHub"
+    },
+    "contexts": {
+      "addcontext": "Add context",
+      "choosecontext": "Choose context"
+    },
+    "resource": {
+      "filter": "filter",
+      "name": "Name",
+      "created": "Created",
+      "containers": "Containers",
+      "status": "Status",
+      "type": "Type",
+      "ports": "Ports"
+    },
+    "detail": {
+      "details": "Details",
+      "id": "ID",
+      "name": "Name",
+      "labels": "Labels",
+      "annotations": "Annotations",
+      "created": "Created",
+      "status": "Status",
+      "owner": "Owner",
+      "logs": "Logs",
+      "data": "Data",
+      "manifest": "Manifest"
+    },
+    "preferences": {
+      "theme": "Theme",
+      "language": "Language"
+    }
+  },
+  "common": {
+    "context": "Context"
+  },
+  "sidebar": {
+    "overview": "Overview",
+    "cluster": "Cluster",
+    "user": "User",
+    "namespace": "Namespace",
+    "runtime": "Runtime",
+    "pods": "Pods",
+    "replicasets": "Replica Sets",
+    "deployments": "Deployments",
+    "jobs": "Jobs",
+    "cronjobs": "Cron Jobs",
+    "configuration": "Configuration",
+    "configmaps": "Config Maps",
+    "secrets": "Secrets",
+    "connectivity": "Connectivity",
+    "services": "Services",
+    "ingresses": "Ingresses",
+    "networkpolicies": "Network Policies",
+    "security": "Security",
+    "serviceaccounts": "Service Accounts",
+    "roles": "Roles",
+    "rolebindings": "Role Bindings"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "contexts": "Contexts",
+    "new": "New",
+    "preferences": "Preferences",
+    "pods": "Pods",
+    "replicasets": "Replica Sets",
+    "deployments": "Deployments",
+    "jobs": "Jobs",
+    "cronjobs": "Cron Jobs",
+    "configmaps": "Config Maps",
+    "secrets": "Secrets",
+    "services": "Services",
+    "ingresses": "Ingresses",
+    "networkpolicies": "Network Policies",
+    "serviceaccounts": "Service Accounts",
+    "roles": "Roles",
+    "rolebindings": "Role Bindings"
+  }
+}

@@ -1,81 +1,86 @@
 <template>
   <main class="overview">
-    <h2>Overview</h2>
+    <h2>{{ $t('sidebar.overview') }}</h2>
     <section>
-      <h3>Runtime</h3>
+      <h3>{{ $t('sidebar.runtime') }}</h3>
       <div class="stats">
         <dl>
-          <dt>Pods</dt>
+          <dt>{{ $t('sidebar.pods') }}</dt>
           <dd v-if="data">{{ data.pods }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Deployments</dt>
+          <dt>{{ $t('sidebar.replicasets') }}</dt>
+          <dd v-if="data">{{ data.replicasets }}</dd>
+          <dd v-else class="text-placeholder"></dd>
+        </dl>
+        <dl>
+          <dt>{{ $t('sidebar.deployments') }}</dt>
           <dd v-if="data">{{ data.deployments }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Jobs</dt>
+          <dt>{{ $t('sidebar.jobs') }}</dt>
           <dd v-if="data">{{ data.jobs }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Cron Jobs</dt>
+          <dt>{{ $t('sidebar.cronjobs') }}</dt>
           <dd v-if="data">{{ data.cronjobs }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
       </div>
     </section>
     <section>
-      <h3>Configuration</h3>
+      <h3>{{ $t('sidebar.configuration') }}</h3>
       <div class="stats">
         <dl>
-          <dt>Config Maps</dt>
+          <dt>{{ $t('sidebar.configmaps') }}</dt>
           <dd v-if="data">{{ data.configmaps }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Secrets</dt>
+          <dt>{{ $t('sidebar.secrets') }}</dt>
           <dd v-if="data">{{ data.secrets }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
       </div>
     </section>
     <section>
-      <h3>Connectivity</h3>
+      <h3>{{ $t('sidebar.connectivity') }}</h3>
       <div class="stats">
         <dl>
-          <dt>Services</dt>
+          <dt>{{ $t('sidebar.services') }}</dt>
           <dd v-if="data">{{ data.services }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Ingresses</dt>
+          <dt>{{ $t('sidebar.ingresses') }}</dt>
           <dd v-if="data">{{ data.ingresses }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Network Policies</dt>
+          <dt>{{ $t('sidebar.networkpolicies') }}</dt>
           <dd v-if="data">{{ data.networkpolicies }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
       </div>
     </section>
     <section>
-      <h3>Security</h3>
+      <h3>{{ $t('sidebar.security') }}</h3>
       <div class="stats">
         <dl>
-          <dt>Service Accounts</dt>
+          <dt>{{ $t('sidebar.serviceaccounts') }}</dt>
           <dd v-if="data">{{ data.serviceaccounts }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Roles</dt>
+          <dt>{{ $t('sidebar.roles') }}</dt>
           <dd v-if="data">{{ data.roles }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>
         <dl>
-          <dt>Role Bindings</dt>
+          <dt>{{ $t('sidebar.rolebindings') }}</dt>
           <dd v-if="data">{{ data.rolebindings }}</dd>
           <dd v-else class="text-placeholder"></dd>
         </dl>

@@ -2,14 +2,14 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Created</th>
+        <th>{{ $t('page.resource.name') }}</th>
+        <th>{{ $t('page.resource.created') }}</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="item of items" :key="item.metadata.uid" @click="handleSelect(item)">
         <td>{{ item.metadata.name }}</td>
-        <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
+        <td>{{ formatAge(item.metadata.creationTimestamp, $i18n.locale) }}</td>
       </tr>
     </tbody>
   </table>

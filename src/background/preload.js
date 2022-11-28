@@ -8,6 +8,8 @@ const useLiteralInvokify = (...args) => args.reduce((accum, next) => ({
   ...accum
 }), {});
 
+contextBridge.exposeInMainWorld('os', process.platform);
+
 contextBridge.exposeInMainWorld('api', {
   ...useLiteralInvokify(
     'listConfigs',

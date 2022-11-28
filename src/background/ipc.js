@@ -7,6 +7,7 @@ const { getDB, saveDB } = require('./db');
 const { loadKubeConfig } = require('./kubernetes');
 const { methodForResourceType, apiForResourceType } = require('./mappings');
 const { getLogEmitter, stopLogEmitter } = require('./logs');
+const { setMenu } = require('./menu');
 
 const kubeDir = resolve(homedir(), '.kube');
 
@@ -128,6 +129,7 @@ function registerIpcHandlers() {
 
     const results = await Promise.all([
       coreClient.listNamespacedPod(context.namespace),
+      appsClient.listNamespacedReplicaSet(context.namespace),
       appsClient.listNamespacedDeployment(context.namespace),
       batchClient.listNamespacedJob(context.namespace),
       batchClient.listNamespacedCronJob(context.namespace),
@@ -142,14 +144,14 @@ function registerIpcHandlers() {
     ]);
 
     const [
-      pods, deployments, jobs, cronjobs,
+      pods, replicasets, deployments, jobs, cronjobs,
       configmaps, secrets,
       services, ingresses, networkpolicies,
       serviceaccounts, roles, rolebindings
     ] = results.map((data) => data.body.items.length);
 
     return {
-      pods, deployments, jobs, cronjobs,
+      pods, replicasets, deployments, jobs, cronjobs,
       configmaps, secrets,
       services, ingresses, networkpolicies,
       serviceaccounts, roles, rolebindings
@@ -187,6 +189,8 @@ function registerIpcHandlers() {
     db.preferences = data;
 
     await saveDB(db);
+
+    setMenu();
   });
 
   const openGitHubRepository = () => shell.openExternal('https://github.com/RecuencoJones/vizkochos');

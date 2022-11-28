@@ -2,9 +2,9 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
+        <th>{{ $t('page.resource.name') }}</th>
         <th>URLs</th>
-        <th>Created</th>
+        <th>{{ $t('page.resource.created') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +16,7 @@
             <br/>
           </template>
         </td>
-        <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
+        <td>{{ formatAge(item.metadata.creationTimestamp, $i18n.locale) }}</td>
       </tr>
     </tbody>
   </table>

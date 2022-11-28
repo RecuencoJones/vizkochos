@@ -4,10 +4,18 @@
       <table v-if="preferences">
         <tbody>
           <tr>
-            <th>Theme</th>
+            <th>{{ $t('page.preferences.theme') }}</th>
             <td>
               <select @change="handleChangeTheme">
                 <option v-for="theme of themes" :key="theme.class" :value="theme.class" :selected="preferences.theme === theme.class">{{ theme.name }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>{{ $t('page.preferences.language') }}</th>
+            <td>
+              <select @change="handleChangeLanguage">
+                <option v-for="language of languages" :key="language.code" :value="language.code" :selected="preferences.language === language.code">{{ language.name }}</option>
               </select>
             </td>
           </tr>
@@ -19,12 +27,14 @@
 
 <script>
 import { themes } from '../themes';
+import { languages } from '../languages';
 import { events } from '../events';
 
 export default {
   data() {
     return {
       themes,
+      languages,
       preferences: null
     };
   },
@@ -35,7 +45,8 @@ export default {
 
     async savePreferences() {
       await api.savePreferences({
-        theme: this.preferences.theme
+        theme: this.preferences.theme,
+        language: this.preferences.language
       });
 
       events.emit('reload-preferences');
@@ -43,6 +54,12 @@ export default {
 
     async handleChangeTheme(event) {
       this.preferences.theme = event.target.value;
+
+      await this.savePreferences();
+    },
+
+    async handleChangeLanguage(event) {
+      this.preferences.language = event.target.value;
 
       await this.savePreferences();
     }

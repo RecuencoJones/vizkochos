@@ -1,7 +1,7 @@
 export const resources = [
   {
     icon: 'bi-boxes',
-    name: 'Runtime',
+    name: 'runtime',
     resources: [
       'pods',
       'replicasets',
@@ -11,7 +11,7 @@ export const resources = [
     ]
   },
   {
-    name: 'Configuration',
+    name: 'configuration',
     icon: 'bi-gear',
     resources: [
       'configmaps',
@@ -19,12 +19,21 @@ export const resources = [
     ]
   },
   {
-    name: 'Connectivity',
+    name: 'connectivity',
     icon: 'bi-ethernet',
     resources: [
       'services',
       'ingresses',
       'networkpolicies'
+    ]
+  },
+  {
+    name: 'security',
+    icon: 'bi-lock',
+    resources: [
+      'serviceaccounts',
+      'roles',
+      'rolebindings'
     ]
   }
 ];

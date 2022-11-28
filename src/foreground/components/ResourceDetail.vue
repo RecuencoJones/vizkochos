@@ -1,23 +1,23 @@
 <template>
   <section class="resource-detail">
-    <button @click="handleClose">close</button>
+    <button @click="handleClose"><i class="bi-x-lg" /></button>
     <h3>{{ item.metadata.name }}</h3>
     <details open>
       <summary>
-        <strong><i class="bi-card-list" /> Details</strong>
+        <strong><i class="bi-card-list" /> {{ $t('page.detail.details') }}</strong>
       </summary>
       <table>
         <tbody>
           <tr>
-            <th>ID</th>
+            <th>{{ $t('page.detail.id') }}</th>
             <td>{{ item.metadata.uid }}</td>
           </tr>
           <tr>
-            <th>Name</th>
+            <th>{{ $t('page.detail.name') }}</th>
             <td>{{ item.metadata.name }}</td>
           </tr>
           <tr v-if="item.metadata.labels">
-            <th>Labels</th>
+            <th>{{ $t('page.detail.labels') }}</th>
             <td>
               <span v-for="(value, label) of item.metadata.labels" :key="label">
                 {{ label }}: {{ value }}<br />
@@ -25,7 +25,7 @@
             </td>
           </tr>
           <tr v-if="item.metadata.annotations">
-            <th>Annotations</th>
+            <th>{{ $t('page.detail.annotations') }}</th>
             <td>
               <span v-for="(value, label) of item.metadata.annotations" :key="label">
                 {{ label }}: {{ value }}<br />
@@ -33,15 +33,15 @@
             </td>
           </tr>
           <tr>
-            <th>Created</th>
-            <td>{{ item.metadata.creationTimestamp }}</td>
+            <th>{{ $t('page.detail.created') }}</th>
+            <td>{{ formatTimestamp(item.metadata.creationTimestamp) }}</td>
           </tr>
           <tr v-if="item.status && item.status.phase">
-            <th>Status</th>
+            <th>{{ $t('page.detail.status') }}</th>
             <td>{{ item.status.phase }}</td>
           </tr>
           <tr v-if="item.metadata.ownerReferences">
-            <th>Owner</th>
+            <th>{{ $t('page.detail.owner') }}</th>
             <td>
               <span v-for="owner of item.metadata.ownerReferences" :key="owner.uid">
                 {{ owner.kind }}: <router-link :to="'/contexts/' + context + '/' + owner.kind.toLowerCase() + 's?item=' + owner.name">{{ owner.name }}</router-link><br />
@@ -53,15 +53,13 @@
     </details>
     <details v-if="item.spec && item.spec.containers" open>
       <summary>
-        <strong><i class="bi-justify" /> Logs</strong>
+        <strong><i class="bi-justify" /> {{ $t('page.detail.logs') }}</strong>
       </summary>
       <pre class="logs" ref="logs"><span v-for="(entry, index) in logs" :key="index">{{ entry }}</span></pre>
     </details>
     <details v-if="item.data" open>
       <summary>
-        <strong>
-          Data
-        </strong>
+        <strong>{{ $t('page.detail.data') }}</strong>
       </summary>
       <table>
         <tbody>
@@ -74,7 +72,7 @@
     </details>
     <details>
       <summary>
-        <strong><i class="bi-filetype-yml" /> Manifest</strong>
+        <strong><i class="bi-filetype-yml" /> {{ $t('page.detail.manifest') }}</strong>
       </summary>
       <pre>{{ toYaml(item) }}</pre>
     </details>
@@ -83,6 +81,7 @@
 
 <script>
 import YAML from 'js-yaml';
+import { DateTime } from 'luxon';
 import { useContext } from '../use/context';
 
 export default {
@@ -128,6 +127,12 @@ export default {
 
     toYaml(data) {
       return YAML.dump(data, { lineWidth: -1 });
+    },
+
+    formatTimestamp(timestamp) {
+      const parsed = DateTime.fromMillis(Date.parse(timestamp));
+
+      return parsed.toLocaleString(DateTime.DATETIME_FULL, { locale: this.$i18n.locale })
     }
   },
   watch: {

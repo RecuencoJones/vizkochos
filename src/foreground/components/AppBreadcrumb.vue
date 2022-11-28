@@ -1,10 +1,10 @@
 <template>
   <div class="app-breadcrumb">
-    <router-link class="crumb" to="/"><i class="bi-house-fill" /> Home</router-link>
+    <router-link class="crumb" to="/"><i class="bi-house-fill" /> {{ $t('breadcrumb.home') }}</router-link>
     <template v-for="crumb of crumbs" :key="crumb.path" >
       <i class="bi-chevron-right" />
       <router-link class="crumb" :to="crumb.path">
-        {{ sanitize(crumb.name) }}
+        {{ $t('breadcrumb.' + sanitize(crumb.name), sanitize(crumb.name)) }}
       </router-link>
     </template>
   </div>

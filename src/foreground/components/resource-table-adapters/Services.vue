@@ -2,10 +2,10 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Ports</th>
-        <th>Created</th>
+        <th>{{ $t('page.resource.name') }}</th>
+        <th>{{ $t('page.resource.type') }}</th>
+        <th>{{ $t('page.resource.ports') }}</th>
+        <th>{{ $t('page.resource.created') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -13,7 +13,7 @@
         <td>{{ item.metadata.name }}</td>
         <td>{{ item.spec.type }}</td>
         <td>{{ formatPorts(item.spec.ports) }}</td>
-        <td>{{ formatAge(item.metadata.creationTimestamp) }}</td>
+        <td>{{ formatAge(item.metadata.creationTimestamp, $i18n.locale) }}</td>
       </tr>
     </tbody>
   </table>
