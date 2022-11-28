@@ -31,6 +31,7 @@
 .theme-kubernetes {
   --color-dark: #000000;
   --color-gray: #dddddd;
+  --color-gray-lighter: #f6f8fa;
   --color-blue: #326ce5;
   --color-light: #ffffff;
 
@@ -49,7 +50,7 @@
   --color-detail-title: var(--color-blue);
   --color-resource-table-header-background: var(--color-blue);
   --color-resource-table-header-text: var(--color-light);
-  --color-resource-table-highlight-background: var(--color-gray);
+  --color-resource-table-highlight-background: var(--color-gray-lighter);
   --color-resource-table-highlight-text: unset;
   --color-modal-background: var(--color-light);
   --color-modal-border: var(--color-dark);
