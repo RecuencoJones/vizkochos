@@ -1,0 +1,12 @@
+diff --git a/node_modules/@electron-forge/cli/dist/util/terminate.js b/node_modules/@electron-forge/cli/dist/util/terminate.js
+index 48002d6..2faf90e 100644
+--- a/node_modules/@electron-forge/cli/dist/util/terminate.js
++++ b/node_modules/@electron-forge/cli/dist/util/terminate.js
+@@ -9,6 +9,7 @@ function redConsoleError(msg) {
+     console.error(_chalk.default.red(msg));
+ }
+ process.on('unhandledRejection', (reason, promise)=>{
++    console.log(JSON.stringify(reason));
+     redConsoleError('\nAn unhandled rejection has occurred inside Forge:');
+     redConsoleError(reason.toString().trim());
+     redConsoleError('\nElectron Forge was terminated. Location:');
