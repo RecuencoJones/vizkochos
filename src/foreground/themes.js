@@ -4,6 +4,9 @@ export const themes = [
     class: 'theme-bizcocho',
     default: true
   }, {
+    name: 'Kubernetes',
+    class: 'theme-kubernetes'
+  }, {
     name: 'CLI',
     class: 'theme-cli'
   }, {

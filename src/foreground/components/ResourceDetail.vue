@@ -169,6 +169,10 @@ export default {
   background-color: var(--color-detail-background);
   box-shadow: 0 0 3px 0 var(--color-box-shadow);
 
+  th, summary {
+    color: var(--color-detail-title);
+  }
+
   table {
     padding: .5rem;
 
