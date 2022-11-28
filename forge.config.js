@@ -10,11 +10,15 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        bin: 'Vizkochos'
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        bin: 'Vizkochos'
+      },
     },
   ],
 };
