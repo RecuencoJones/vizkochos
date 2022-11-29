@@ -56,6 +56,70 @@ dl {
   }
 }
 
+.btn {
+  padding: .25rem;
+  border-radius: 0.25rem;
+  margin: .25rem .75rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    outline: 2px dashed rgb(200, 200, 255);
+    outline-offset: .25rem;
+  }
+
+  &.btn--text {
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    padding: 0;
+  }
+}
+
+.form {
+  .form__field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+
+      > * {
+        align-self: flex-start !important;
+        margin: .5rem;
+      }
+    }
+  }
+
+  .form__label,
+  .form__value {
+    align-self: center;
+  }
+
+  .form__value {
+    select {
+      display: block;
+      color: inherit;
+      background: inherit;
+      border: none;
+      font-size: inherit;
+      padding: .25rem;
+      border-radius: .25rem;
+
+      &:focus-visible, option:focus-visible {
+        outline: 2px dashed var(--color-outline);
+        outline-offset: .25rem;
+      }
+    }
+  }
+}
+
 .text-placeholder {
   display: inline-block;
   position: relative;
@@ -105,6 +169,10 @@ dl {
 .columns {
   display: flex;
   flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 
   > * {
     flex: 1;

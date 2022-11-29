@@ -20,10 +20,12 @@ contextBridge.exposeInMainWorld('api', {
     'listContexts',
     'addRecentView',
     'listRecentViews',
+    'clearRecentViews',
     'listResourceType',
     'getContextOverview',
     'getPreferences',
     'savePreferences',
+    'openAppDataLocation',
     'openUrl',
     'openGitHubRepository'
   ),

@@ -7,7 +7,7 @@
       </router-link>
     </nav>
     <nav class="app-header__right">
-      <router-link to="/preferences"><i class="bi-sliders" /></router-link>
+      <router-link to="/preferences" :title="$t('tooltip.preferences')"><i class="bi-sliders" /></router-link>
     </nav>
   </header>
 </template>

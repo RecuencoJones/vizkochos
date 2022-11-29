@@ -19,6 +19,7 @@
     "home": {
       "quickstart": "Inicio rápido",
       "recents": "Visto recientemente",
+      "nothingrecent": "Nada visto todavía",
       "pinned": "Anclado",
       "nothingpinned": "Nada anclado todavía",
       "help": "Ayuda",
@@ -32,6 +33,7 @@
       "choosecontext": "Seleccionar contexto"
     },
     "resource": {
+      "refresh": "Actualizar",
       "filter": "filtrar",
       "name": "Nombre",
       "created": "Creación",
@@ -54,8 +56,13 @@
       "manifest": "Manifiesto"
     },
     "preferences": {
+      "appearance": "Apariencia",
       "theme": "Tema",
-      "language": "Idioma"
+      "language": "Idioma",
+      "recents": "Recientes",
+      "clearrecents": "Borrar vistas recientes",
+      "advanced": "Avanzado",
+      "openappdatalocation": "Ver carpeta de aplicación"
     }
   },
   "common": {
@@ -102,5 +109,13 @@
     "serviceaccounts": "Service Accounts",
     "roles": "Roles",
     "rolebindings": "Role Bindings"
+  },
+  "tooltip": {
+    "close": "Cerrar",
+    "preferences": "Preferencias",
+    "text": "Texto",
+    "background": "Fondo",
+    "link": "Enlace",
+    "highlight": "Resalte"
   }
 }

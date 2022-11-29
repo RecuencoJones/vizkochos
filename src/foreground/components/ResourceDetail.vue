@@ -1,20 +1,20 @@
 <template>
   <section class="resource-detail">
-    <button @click="handleClose"><i class="bi-x-lg" /></button>
+    <button class="btn btn--text" @click="handleClose" :title="$t('tooltip.close')"><i class="bi-x-lg" /></button>
     <h3>{{ item.metadata.name }}</h3>
     <details open>
       <summary>
         <strong><i class="bi-card-list" /> {{ $t('page.detail.details') }}</strong>
       </summary>
-      <table>
+      <table class="data">
         <tbody>
           <tr>
             <th>{{ $t('page.detail.id') }}</th>
-            <td>{{ item.metadata.uid }}</td>
+            <td class="copiable" @click="copyToClipboard(item.metadata.uid)">{{ item.metadata.uid }}</td>
           </tr>
           <tr>
             <th>{{ $t('page.detail.name') }}</th>
-            <td>{{ item.metadata.name }}</td>
+            <td class="copiable" @click="copyToClipboard(item.metadata.name)">{{ item.metadata.name }}</td>
           </tr>
           <tr v-if="item.metadata.labels">
             <th>{{ $t('page.detail.labels') }}</th>
@@ -34,11 +34,11 @@
           </tr>
           <tr>
             <th>{{ $t('page.detail.created') }}</th>
-            <td>{{ formatTimestamp(item.metadata.creationTimestamp) }}</td>
+            <td class="copiable" @click="copyToClipboard(item.metadata.creationTimestamp)">{{ formatTimestamp(item.metadata.creationTimestamp) }}</td>
           </tr>
           <tr v-if="item.status && item.status.phase">
             <th>{{ $t('page.detail.status') }}</th>
-            <td>{{ item.status.phase }}</td>
+            <td class="copiable">{{ item.status.phase }}</td>
           </tr>
           <tr v-if="item.metadata.ownerReferences">
             <th>{{ $t('page.detail.owner') }}</th>
@@ -61,11 +61,11 @@
       <summary>
         <strong>{{ $t('page.detail.data') }}</strong>
       </summary>
-      <table>
+      <table class="data mono">
         <tbody>
           <tr v-for="(value, key) of item.data" :key="key">
-            <th>{{ key }}</th>
-            <td>{{ value }}</td>
+            <th class="copiable" @click="copyToClipboard(key)">{{ key }}</th>
+            <td class="copiable" @click="copyToClipboard(value)">{{ value }}</td>
           </tr>
         </tbody>
       </table>
@@ -74,7 +74,7 @@
       <summary>
         <strong><i class="bi-filetype-yml" /> {{ $t('page.detail.manifest') }}</strong>
       </summary>
-      <pre>{{ toYaml(item) }}</pre>
+      <pre class="manifest">{{ toYaml(item) }}</pre>
     </details>
   </section>
 </template>
@@ -83,11 +83,13 @@
 import YAML from 'js-yaml';
 import { DateTime } from 'luxon';
 import { useContext } from '../use/context';
+import { useClipboard } from '../use/clipboard';
 
 export default {
   setup() {
     return {
-      ...useContext()
+      ...useContext(),
+      ...useClipboard()
     };
   },
   props: [ 'item' ],
@@ -174,15 +176,38 @@ export default {
   }
 
   table {
+    width: 100%;
     padding: .5rem;
 
     th {
-      text-align: right;
+      text-align: left;
     }
 
     td, th {
       padding: .5rem;
     }
+  }
+
+  table.data {
+    font-size: .85rem;
+
+    th, td {
+      background-color: var(--color-detail-data-background);
+
+      &.copiable:hover {
+        cursor: copy;
+        color: var(--color-detail-data-hightlight-text);
+        background-color: var(--color-detail-data-hightlight-background);
+      }
+    }
+
+    td {
+      white-space: nowrap;
+    }
+  }
+
+  table.mono {
+    font-family: monospace;
   }
 
   pre {
@@ -197,6 +222,11 @@ export default {
   pre.logs {
     display: flex;
     flex-direction: column-reverse;
+    background-color: var(--color-detail-logs-background);
+  }
+
+  pre.manifest {
+    background-color: var(--color-detail-manifest-background);
   }
 
   summary {

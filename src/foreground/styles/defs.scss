@@ -13,6 +13,7 @@
   --color-header-link: var(--color-light-cookie);
   --color-toolbar-background: var(--color-light-cookie);
   --color-main-background: var(--color-glace);
+  --color-main-text: var(--color-darkest-chocolate);
   --color-sidebar-background: var(--color-light-cookie);
   --color-sidebar-heading: var(--color-dark-cookie);
   --color-sidebar-link: var(--color-dark-chocolate);
@@ -20,12 +21,18 @@
   --color-breadcrumb-link: var(--color-light-cookie);
   --color-detail-background: var(--color-light-cookie);
   --color-detail-title: var(--color-dark-cookie);
+  --color-detail-logs-background: var(--color-cream);
+  --color-detail-manifest-background: var(--color-cream);
+  --color-detail-data-background: var(--color-cream);
+  --color-detail-data-hightlight-background: var(--color-chocolate);
+  --color-detail-data-hightlight-text: var(--color-cream);
   --color-resource-table-header-background: var(--color-light-cookie);
   --color-resource-table-highlight-background: var(--color-cream);
   --color-resource-table-highlight-text: unset;
   --color-modal-background: var(--color-glace);
   --color-modal-border: var(--color-chocolate);
   --color-box-shadow: var(--color-dark-cookie);
+  --color-outline: var(--color-dark-cookie);
 }
 
 .theme-kubernetes {
@@ -48,6 +55,11 @@
   --color-breadcrumb-link: var(--color-light);
   --color-detail-background: var(--color-gray);
   --color-detail-title: var(--color-blue);
+  --color-detail-logs-background: var(--color-gray-lighter);
+  --color-detail-manifest-background: var(--color-gray-lighter);
+  --color-detail-data-background: var(--color-gray-lighter);
+  --color-detail-data-hightlight-background: var(--color-blue);
+  --color-detail-data-hightlight-text: var(--color-light);
   --color-resource-table-header-background: var(--color-blue);
   --color-resource-table-header-text: var(--color-light);
   --color-resource-table-highlight-background: var(--color-gray-lighter);
@@ -55,6 +67,7 @@
   --color-modal-background: var(--color-light);
   --color-modal-border: var(--color-dark);
   --color-box-shadow: var(--color-dark);
+  --color-outline: var(--color-blue);
 }
 
 .theme-cli {
@@ -75,6 +88,11 @@
   --color-breadcrumb-link: var(--color-font);
   --color-detail-background: var(--color-dark);
   --color-detail-title: var(--color-font);
+  --color-detail-logs-background: var(--color-dark);
+  --color-detail-manifest-background: var(--color-dark);
+  --color-detail-data-background: var(--color-dark);
+  --color-detail-data-hightlight-background: var(--color-font);
+  --color-detail-data-hightlight-text: var(--color-dark);
   --color-resource-table-header-background: var(--color-font);
   --color-resource-table-header-text: var(--color-dark);
   --color-resource-table-highlight-background: var(--color-font);
@@ -82,6 +100,7 @@
   --color-modal-background: var(--color-dark);
   --color-modal-border: var(--color-font);
   --color-box-shadow: var(--color-font);
+  --color-outline: var(--color-font);
 }
 
 .theme-plain {
@@ -102,6 +121,11 @@
   --color-breadcrumb-link: unset;
   --color-detail-background: var(--color-light);
   --color-detail-title: unset;
+  --color-detail-logs-background: unset;
+  --color-detail-manifest-background: unset;
+  --color-detail-data-background: unset;
+  --color-detail-data-hightlight-background: var(--color-gray);
+  --color-detail-data-hightlight-text: unset;
   --color-resource-table-header-background: var(--color-light);
   --color-resource-table-header-text: unset;
   --color-resource-table-highlight-background: var(--color-gray);
@@ -109,6 +133,7 @@
   --color-modal-background: var(--color-light);
   --color-modal-border: var(--color-dark);
   --color-box-shadow: var(--color-gray);
+  --color-outline: var(--color-gray);
 
   a {
     color: revert !important;
@@ -118,7 +143,6 @@
 
 .theme-plain--dark {
   --color-dark: #000000;
-  --color-gray: #cccccc;
   --color-light: #ffffff;
   --color-link: #ff7300;
 
@@ -135,6 +159,11 @@
   --color-breadcrumb-link: var(--color-link);
   --color-detail-background: var(--color-dark);
   --color-detail-title: var(--color-link);
+  --color-detail-logs-background: var(--color-dark);
+  --color-detail-manifest-background: var(--color-dark);
+  --color-detail-data-background: var(--color-dark);
+  --color-detail-data-hightlight-background: var(--color-link);
+  --color-detail-data-hightlight-text: var(--color-dark);
   --color-resource-table-header-background: var(--color-link);
   --color-resource-table-header-text: var(--color-dark);
   --color-resource-table-highlight-background: var(--color-link);
@@ -142,8 +171,10 @@
   --color-modal-background: var(--color-dark);
   --color-modal-border: var(--color-light);
   --color-box-shadow: var(--color-link);
+  --color-outline: var(--color-link);
 
   a {
+    color: var(--color-link);
     text-decoration: underline;
   }
 }

@@ -4,7 +4,7 @@
     <template v-for="crumb of crumbs" :key="crumb.path" >
       <i class="bi-chevron-right" />
       <router-link class="crumb" :to="crumb.path">
-        {{ $t('breadcrumb.' + sanitize(crumb.name), sanitize(crumb.name)) }}
+        {{ t('breadcrumb.' + sanitize(crumb.name), sanitize(crumb.name)) }}
       </router-link>
     </template>
   </div>
@@ -38,6 +38,15 @@ export default {
     }
   },
   methods: {
+    t(key, defaultValue) {
+      const expectedTranslation = this.$t(key);
+
+      if (expectedTranslation === key) {
+        return defaultValue;
+      }
+
+      return expectedTranslation;
+    },
     sanitize(str) {
       return decodeURIComponent(str);
     }

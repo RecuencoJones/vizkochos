@@ -1,7 +1,7 @@
 <template>
   <main class="toolbar-layout contexts">
     <nav class="toolbar">
-      <router-link to="/contexts/new"><i class="bi-plus-square-dotted" /> {{ $t('page.contexts.addcontext') }}</router-link>
+      <router-link class="btn btn--text" to="/contexts/new"><i class="bi-plus-square-dotted" /> {{ $t('page.contexts.addcontext') }}</router-link>
     </nav>
     <section class="view">
       <h4>{{ $t('page.contexts.choosecontext') }}</h4>

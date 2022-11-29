@@ -21,4 +21,12 @@ async function initLanguages() {
   instances.set('i18n', i18next);
 }
 
-module.exports = { initLanguages };
+async function reloadLanguage() {
+  const db = await getDB();
+
+  const language = db?.preferences?.language || 'en';
+
+  await i18next.changeLanguage(language);
+}
+
+module.exports = { initLanguages, reloadLanguage };

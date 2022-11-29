@@ -6,7 +6,7 @@
     <div class="modal-wrapper" v-if="showShortcuts">
       <section class="modal">
         <div class="modal__header">
-          <button @click="showShortcuts = false"><i class="bi-x-lg" /></button>
+          <button class="btn btn--text" @click="showShortcuts = false" :title="$t('tooltip.close')"><i class="bi-x-lg" /></button>
         </div>
         <div class="modal__main">
           <table class="shortcuts">

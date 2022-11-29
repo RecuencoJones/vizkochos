@@ -1,11 +1,9 @@
-const { homedir } = require('os');
 const { resolve } = require('path');
 const { mkdirSync } = require('fs');
 const { readFile, writeFile } = require('fs/promises');
-const { isDevelopment } = require('./constants');
+const { isDevelopment, userAppHome } = require('./constants');
 
 const dbFileName = 'db.json';
-const userAppHome = resolve(homedir(), '.vizkochos');
 const dbPath = isDevelopment ? dbFileName : resolve(userAppHome, dbFileName);
 
 if (!isDevelopment) {

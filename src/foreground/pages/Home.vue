@@ -22,9 +22,12 @@
         </section>
         <section>
           <h4><i class="bi-clock-history" /> {{ $t('page.home.recents') }}</h4>
-          <div v-for="(recent, index) of recents" :key="index">
-            <router-link :to="recent.path"><i class="bi-box" /> {{ recent.name }}</router-link>
-          </div>
+          <template v-if="recents && recents.length">
+            <div v-for="(recent, index) of recents" :key="index">
+              <router-link :to="recent.path"><i class="bi-box" /> {{ recent.name }}</router-link>
+            </div>
+          </template>
+          <div v-else><i>{{ $t('page.home.nothingrecent') }}</i></div>
         </section>
       </div>
       <div>
@@ -69,6 +72,26 @@ export default {
 <style lang="scss">
 .quickstart {
   padding: 10vh 20vw;
+
+  @media (max-width: 1000px) {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+
+  @media (max-height: 1000px) {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  @media (max-height: 800px) {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+  }
 
   h1, h3 {
     color: var(--color-header-background);

@@ -1,27 +1,50 @@
 <template>
   <main class="preferences">
-    <form @submit.prevent>
-      <table v-if="preferences">
-        <tbody>
-          <tr>
-            <th>{{ $t('page.preferences.theme') }}</th>
-            <td>
-              <select @change="handleChangeTheme">
-                <option v-for="theme of themes" :key="theme.class" :value="theme.class" :selected="preferences.theme === theme.class">{{ theme.name }}</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th>{{ $t('page.preferences.language') }}</th>
-            <td>
-              <select @change="handleChangeLanguage">
+    <div v-if="preferences">
+      <section class="form">
+        <h4>{{ $t('page.preferences.appearance') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <div class="form__label">
+              <label for="theme"><i class="bi-translate" /> {{ $t('page.preferences.language') }}</label>
+            </div>
+            <div class="form__value">
+              <select name="language" @change="handleChangeLanguage">
                 <option v-for="language of languages" :key="language.code" :value="language.code" :selected="preferences.language === language.code">{{ language.name }}</option>
               </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+            </div>
+          </div>
+          <div class="form__field">
+            <div class="form__label">
+              <label for="theme"><i class="bi-palette" /> {{ $t('page.preferences.theme') }}</label>
+            </div>
+            <Colorset />
+            <div class="form__value">
+              <select name="theme" @change="handleChangeTheme">
+                <option v-for="theme of themes" :key="theme.class" :value="theme.class" :selected="preferences.theme === theme.class">{{ theme.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="form">
+        <h4>{{ $t('page.preferences.recents') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="clearRecents"><i class="bi-trash" /> {{ $t('page.preferences.clearrecents') }}</a>
+          </div>
+        </div>
+      </section>
+      <section class="form">
+        <h4>{{ $t('page.preferences.advanced') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="openAppDataLocation"><i class="bi-folder2-open" /> {{ $t('page.preferences.openappdatalocation') }}</a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div v-else>Loading preferences...</div>
   </main>
 </template>
 
@@ -29,8 +52,12 @@
 import { themes } from '../themes';
 import { languages } from '../languages';
 import { events } from '../events';
+import Colorset from '../components/Colorset.vue';
 
 export default {
+  components: {
+    Colorset
+  },
   data() {
     return {
       themes,
@@ -52,6 +79,10 @@ export default {
       events.emit('reload-preferences');
     },
 
+    async clearRecents() {
+      await api.clearRecentViews();
+    },
+
     async handleChangeTheme(event) {
       this.preferences.theme = event.target.value;
 
@@ -62,6 +93,10 @@ export default {
       this.preferences.language = event.target.value;
 
       await this.savePreferences();
+    },
+
+    async openAppDataLocation() {
+      await api.openAppDataLocation();
     }
   },
   async mounted() {
@@ -73,5 +108,25 @@ export default {
 <style lang="scss">
 .preferences {
   padding: 10vh 20vw;
+
+  @media (max-width: 1000px) {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+
+  @media (max-height: 1000px) {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  @media (max-height: 800px) {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+  }
 }
 </style>

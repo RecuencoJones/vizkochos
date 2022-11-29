@@ -1,7 +1,7 @@
 <template>
   <section class="resource toolbar-layout">
     <nav class="toolbar">
-      <button @click="handleRefresh"><i class="bi-arrow-clockwise" /></button>
+      <a class="btn btn--text" href="#" @click.prevent="handleRefresh"><i class="bi-arrow-clockwise" /> {{ $t('page.resource.refresh') }}</a>
       <input type="text" :placeholder="$t('page.resource.filter')" v-model="filter">
     </nav>
     <section class="view">
@@ -95,6 +95,10 @@ export default {
 
 <style lang="scss">
 .resource.toolbar-layout {
+  .toolbar {
+    padding-left: 0;
+  }
+
   .view {
     padding: 0;
     box-shadow: inset 0 0 3px 0 var(--color-box-shadow);

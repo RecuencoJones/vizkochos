@@ -1,4 +1,3 @@
-const { homedir } = require('os');
 const { resolve } = require('path');
 const { readdir } = require('fs/promises');
 const { ipcMain, shell } = require('electron');
@@ -8,8 +7,8 @@ const { loadKubeConfig } = require('./kubernetes');
 const { methodForResourceType, apiForResourceType } = require('./mappings');
 const { getLogEmitter, stopLogEmitter } = require('./logs');
 const { setMenu } = require('./menu');
-
-const kubeDir = resolve(homedir(), '.kube');
+const { kubeDir, userAppHome } = require('./constants');
+const { reloadLanguage } = require('./i18n');
 
 async function getContextForName(name) {
   const db = await getDB();
@@ -105,6 +104,14 @@ function registerIpcHandlers() {
     return db.recents;
   });
 
+  ipcMain.handle('clearRecentViews', async () => {
+    const db = await getDB();
+
+    db.recents = [];
+
+    await saveDB(db);
+  });
+
   ipcMain.handle('addRecentView', async (event, view) => {
     const db = await getDB();
 
@@ -190,6 +197,7 @@ function registerIpcHandlers() {
 
     await saveDB(db);
 
+    await reloadLanguage();
     setMenu();
   });
 
@@ -198,6 +206,7 @@ function registerIpcHandlers() {
   ipcMain.on('openGitHubRepository', openGitHubRepository);
   ipcMain.handle('openGitHubRepository', openGitHubRepository);
   ipcMain.handle('openUrl', (event, url) => shell.openExternal(url));
+  ipcMain.handle('openAppDataLocation', () => shell.openPath(userAppHome));
 }
 
 module.exports = { registerIpcHandlers };

@@ -19,6 +19,7 @@
     "home": {
       "quickstart": "Quickstart",
       "recents": "Recently viewed",
+      "nothingrecent": "Nothing viewed yet",
       "pinned": "Pinned",
       "nothingpinned": "Nothing pinned yet",
       "help": "Help",
@@ -32,6 +33,7 @@
       "choosecontext": "Choose context"
     },
     "resource": {
+      "refresh": "Refresh",
       "filter": "filter",
       "name": "Name",
       "created": "Created",
@@ -54,8 +56,13 @@
       "manifest": "Manifest"
     },
     "preferences": {
+      "appearance": "Appearance",
       "theme": "Theme",
-      "language": "Language"
+      "language": "Language",
+      "recents": "Recents",
+      "clearrecents": "Clear recents",
+      "advanced": "Advanced",
+      "openappdatalocation": "Open app data location"
     }
   },
   "common": {
@@ -102,5 +109,13 @@
     "serviceaccounts": "Service Accounts",
     "roles": "Roles",
     "rolebindings": "Role Bindings"
+  },
+  "tooltip": {
+    "close": "Close",
+    "preferences": "Preferences",
+    "text": "Text",
+    "background": "Background",
+    "link": "Link",
+    "highlight": "Highlight"
   }
 }
