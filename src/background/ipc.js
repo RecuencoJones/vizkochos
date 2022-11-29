@@ -21,6 +21,17 @@ async function getContextForName(name) {
   return context;
 }
 
+async function deleteContextWithName(name) {
+  const db = await getDB();
+  const index = db.contexts.findIndex((context) => context.name === name);
+
+  if (~index) {
+    db.contexts.splice(index, 1);
+
+    await saveDB(db);
+  }
+}
+
 function hoistOrUnshift(array, item, keyOf) {
   const index = array.findIndex((i) => keyOf(i) === keyOf(item));
 
@@ -85,6 +96,10 @@ function registerIpcHandlers() {
     const context = await getContextForName(contextName);
 
     return context;
+  });
+
+  ipcMain.handle('deleteContext', async (event, contextName) => {
+    await deleteContextWithName(contextName);
   });
 
   ipcMain.handle('listResourceType', async (event, contextName, resourceType) => {

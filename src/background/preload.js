@@ -16,6 +16,7 @@ contextBridge.exposeInMainWorld('api', {
     'listClusters',
     'listUsers',
     'getContext',
+    'deleteContext',
     'saveContext',
     'listContexts',
     'addRecentView',

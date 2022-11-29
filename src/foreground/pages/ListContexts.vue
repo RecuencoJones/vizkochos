@@ -5,9 +5,26 @@
     </nav>
     <section class="view">
       <h4>{{ $t('page.contexts.choosecontext') }}</h4>
-      <div v-for="context of contexts" :key="context.name">
-        <router-link :to="'/contexts/' + context.name"><i class="bi-box" /> {{ context.name }}</router-link>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="context of contexts" :key="context.name">
+            <td>
+              <router-link :to="'/contexts/' + context.name"><i class="bi-box" /> {{ context.name }}</router-link>
+            </td>
+            <td class="actions">
+              <button class="btn btn--text" @click="deleteContext(context)">
+                <i class="bi-trash" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </main>
 </template>
@@ -22,10 +39,15 @@ export default {
   methods: {
     async loadContexts() {
       this.contexts = await api.listContexts();
+    },
+
+    async deleteContext(context) {
+      await api.deleteContext(context.name);
+      await this.loadContexts();
     }
   },
   mounted() {
-    this.loadContexts()
+    this.loadContexts();
   }
 }
 </script>
@@ -35,8 +57,32 @@ export default {
   .view {
     padding: 10vh 20vw;
 
-    div {
-      padding: 0.25rem 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        th {
+          text-align: left;
+          padding: .5rem;
+        }
+      }
+
+      tbody {
+        tr {
+          td {
+            padding: .5rem;
+
+            &.actions {
+              text-align: right;
+
+              .btn {
+                color: inherit;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
