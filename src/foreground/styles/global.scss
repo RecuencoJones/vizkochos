@@ -122,47 +122,27 @@ dl {
 
 .text-placeholder {
   display: inline-block;
-  position: relative;
   width: 5rem;
   height: 1rem;
-  background: #ccc;
+  background: var(--color-loading-start, #cccccc);
+  animation: blink 1s ease-in-out infinite;
 
-  &::after {
-    animation: shine 1s ease-in-out infinite;
-    animation-fill-mode: forwards;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-
-    background: rgba(255, 255, 255, 0.13);
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.13) 0%,
-      rgba(255, 255, 255, 0.13) 77%,
-      rgba(255, 255, 255, 0.5) 92%,
-      rgba(255, 255, 255, 0.0) 100%
-    );
+  &--short {
+    width: 1rem;
   }
 }
 
-@keyframes shine {
-  10% {
-    opacity: 1;
-    top: 0;
-    left: 100%;
-    transition-property: left, top, opacity;
-    transition-duration: 0.7s, 0.7s, 0.15s;
-    transition-timing-function: ease;
+@keyframes blink {
+  from {
+    background-color: var(--color-loading-start, #cccccc);
   }
-  100% {
-    opacity: 0;
-    top: 0;
-    left: 3%;
-    transition-property: left, top, opacity;
+
+  50% {
+    background-color: var(--color-loading-end, #bdbdbd);
+  }
+
+  to {
+    background-color: var(--color-loading-start, #cccccc);
   }
 }
 

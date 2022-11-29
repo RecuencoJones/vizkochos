@@ -7,27 +7,27 @@
         <dl>
           <dt>{{ $t('sidebar.pods') }}</dt>
           <dd v-if="data">{{ data.pods }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.replicasets') }}</dt>
           <dd v-if="data">{{ data.replicasets }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.deployments') }}</dt>
           <dd v-if="data">{{ data.deployments }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.jobs') }}</dt>
           <dd v-if="data">{{ data.jobs }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.cronjobs') }}</dt>
           <dd v-if="data">{{ data.cronjobs }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
       </div>
     </section>
@@ -37,12 +37,12 @@
         <dl>
           <dt>{{ $t('sidebar.configmaps') }}</dt>
           <dd v-if="data">{{ data.configmaps }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.secrets') }}</dt>
           <dd v-if="data">{{ data.secrets }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
       </div>
     </section>
@@ -52,17 +52,17 @@
         <dl>
           <dt>{{ $t('sidebar.services') }}</dt>
           <dd v-if="data">{{ data.services }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.ingresses') }}</dt>
           <dd v-if="data">{{ data.ingresses }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.networkpolicies') }}</dt>
           <dd v-if="data">{{ data.networkpolicies }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
       </div>
     </section>
@@ -72,17 +72,17 @@
         <dl>
           <dt>{{ $t('sidebar.serviceaccounts') }}</dt>
           <dd v-if="data">{{ data.serviceaccounts }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.roles') }}</dt>
           <dd v-if="data">{{ data.roles }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
         <dl>
           <dt>{{ $t('sidebar.rolebindings') }}</dt>
           <dd v-if="data">{{ data.rolebindings }}</dd>
-          <dd v-else class="text-placeholder"></dd>
+          <dd v-else class="text-placeholder text-placeholder--short"></dd>
         </dl>
       </div>
     </section>
