@@ -27,6 +27,10 @@ export default {
   methods: {
     formatAge,
     formatPorts(ports) {
+      if (!ports) {
+        return '-';
+      }
+
       return ports.map((({ port, targetPort, protocol }) => {
         let value = `${targetPort}/${protocol}`;
 

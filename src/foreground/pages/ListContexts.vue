@@ -57,6 +57,26 @@ export default {
   .view {
     padding: 10vh 20vw;
 
+    @media (max-width: 1000px) {
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+
+    @media (max-width: 600px) {
+      padding-left: 20vw;
+      padding-right: 20vw;
+    }
+
+    @media (max-height: 1000px) {
+      padding-top: 5vh;
+      padding-bottom: 5vh;
+    }
+
+    @media (max-height: 800px) {
+      padding-top: 2vh;
+      padding-bottom: 2vh;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;

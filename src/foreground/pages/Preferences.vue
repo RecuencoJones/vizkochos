@@ -9,7 +9,7 @@
               <label for="theme"><i class="bi-translate" /> {{ $t('page.preferences.language') }}</label>
             </div>
             <div class="form__value">
-              <select name="language" @change="handleChangeLanguage">
+              <select name="language" @change="handleChangeSelect($event, 'language')">
                 <option v-for="language of languages" :key="language.code" :value="language.code" :selected="preferences.language === language.code">{{ language.name }}</option>
               </select>
             </div>
@@ -20,7 +20,7 @@
             </div>
             <Colorset />
             <div class="form__value">
-              <select name="theme" @change="handleChangeTheme">
+              <select name="theme" @change="handleChangeSelect($event, 'theme')">
                 <option v-for="theme of themes" :key="theme.class" :value="theme.class" :selected="preferences.theme === theme.class">{{ theme.name }}</option>
               </select>
             </div>
@@ -32,6 +32,23 @@
         <div class="form__fields">
           <div class="form__field">
             <a class="btn btn--text" href="#" @click.prevent="clearRecents"><i class="bi-trash" /> {{ $t('page.preferences.clearrecents') }}</a>
+          </div>
+        </div>
+      </section>
+      <section class="form">
+        <h4>{{ $t('page.preferences.resourcedetails') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <div class="form__label">
+              <label for="openManifestByDefault">{{ $t('page.preferences.openmanifestbydefault') }}</label>
+            </div>
+            <div class="form__value">
+              <input
+                type="checkbox"
+                name="openManifestByDefault"
+                :checked="preferences.openManifestByDefault"
+                @input="handleChangeCheckbox($event, 'openManifestByDefault')">
+            </div>
           </div>
         </div>
       </section>
@@ -73,7 +90,8 @@ export default {
     async savePreferences() {
       await api.savePreferences({
         theme: this.preferences.theme,
-        language: this.preferences.language
+        language: this.preferences.language,
+        openManifestByDefault: this.preferences.openManifestByDefault
       });
 
       events.emit('reload-preferences');
@@ -83,14 +101,14 @@ export default {
       await api.clearRecentViews();
     },
 
-    async handleChangeTheme(event) {
-      this.preferences.theme = event.target.value;
+    async handleChangeSelect(event, preferenceName) {
+      this.preferences[preferenceName] = event.target.value;
 
       await this.savePreferences();
     },
 
-    async handleChangeLanguage(event) {
-      this.preferences.language = event.target.value;
+    async handleChangeCheckbox(event, preferenceName) {
+      this.preferences[preferenceName] = event.target.checked;
 
       await this.savePreferences();
     },

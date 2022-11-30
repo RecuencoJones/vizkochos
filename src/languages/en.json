@@ -32,6 +32,26 @@
       "addcontext": "Add context",
       "choosecontext": "Choose context"
     },
+    "addcontext": {
+      "save": "Save",
+      "contextname": {
+        "title": "Context name",
+        "desc": "This will be the identifier for the created context",
+        "placeholder": "Name"
+      },
+      "kubeconfig": {
+        "title": "Kubeconfig",
+        "desc": "Select kubeconfig to use",
+        "placeholder": "Choose config"
+      },
+      "contextdetails": {
+        "title": "Context details",
+        "desc": "Provide details to connect to a cluster and namespace",
+        "clusterplaceholder": "Choose cluster",
+        "userplaceholder": "Choose user",
+        "namespaceplaceholder": "type namespace"
+      }
+    },
     "resource": {
       "refresh": "Refresh",
       "filter": "filter",
@@ -61,6 +81,8 @@
       "language": "Language",
       "recents": "Recents",
       "clearrecents": "Clear recents",
+      "resourcedetails": "Resource Details",
+      "openmanifestbydefault": "Open YAML manifest by default",
       "advanced": "Advanced",
       "openappdatalocation": "Open app data location"
     }

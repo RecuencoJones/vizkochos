@@ -70,7 +70,7 @@
         </tbody>
       </table>
     </details>
-    <details>
+    <details :open="openManifestByDefault">
       <summary>
         <strong><i class="bi-filetype-yml" /> {{ $t('page.detail.manifest') }}</strong>
       </summary>
@@ -95,8 +95,14 @@ export default {
   props: [ 'item' ],
   data() {
     return {
+      preferences: null,
       logs: []
     };
+  },
+  computed: {
+    openManifestByDefault() {
+      return this.preferences?.openManifestByDefault || false;
+    }
   },
   methods: {
     async init(item) {
@@ -150,6 +156,9 @@ export default {
         }
       }
     }
+  },
+  async mounted() {
+    this.preferences = await api.getPreferences();
   },
   async beforeUnmount() {
     await this.close(this.item);

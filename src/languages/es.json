@@ -32,6 +32,26 @@
       "addcontext": "Añadir contexto",
       "choosecontext": "Seleccionar contexto"
     },
+    "addcontext": {
+      "save": "Guardar",
+      "contextname": {
+        "title": "Nombre",
+        "desc": "Este sera el identificador para el contexto",
+        "placeholder": "Nombre"
+      },
+      "kubeconfig": {
+        "title": "Kubeconfig",
+        "desc": "Selecciona el fichero kubeconfig a usar",
+        "placeholder": "Elige config"
+      },
+      "contextdetails": {
+        "title": "Detalles de contexto",
+        "desc": "Añade los detalles para conecta a un cluster y namespace",
+        "clusterplaceholder": "Elige cluster",
+        "userplaceholder": "Elige usuario",
+        "namespaceplaceholder": "escribe namespace"
+      }
+    },
     "resource": {
       "refresh": "Actualizar",
       "filter": "filtrar",
@@ -61,6 +81,8 @@
       "language": "Idioma",
       "recents": "Recientes",
       "clearrecents": "Borrar vistas recientes",
+      "resourcedetails": "Detalles de recurso",
+      "openmanifestbydefault": "Abrir manifesto YAML por defecto",
       "advanced": "Avanzado",
       "openappdatalocation": "Ver carpeta de aplicación"
     }
