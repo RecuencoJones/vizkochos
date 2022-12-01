@@ -28,14 +28,6 @@
         </div>
       </section>
       <section class="form">
-        <h4>{{ $t('page.preferences.recents') }}</h4>
-        <div class="form__fields">
-          <div class="form__field">
-            <a class="btn btn--text" href="#" @click.prevent="clearRecents"><i class="bi-trash" /> {{ $t('page.preferences.clearrecents') }}</a>
-          </div>
-        </div>
-      </section>
-      <section class="form">
         <h4>{{ $t('page.preferences.resourcedetails') }}</h4>
         <div class="form__fields">
           <div class="form__field">
@@ -53,10 +45,35 @@
         </div>
       </section>
       <section class="form">
+        <h4>{{ $t('page.preferences.recents') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="clearRecents"><i class="bi-trash" /> {{ $t('page.preferences.clearrecents') }}</a>
+          </div>
+        </div>
+      </section>
+      <section class="form">
+        <h4>{{ $t('page.preferences.pins') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="clearPins"><i class="bi-trash" /> {{ $t('page.preferences.clearpins') }}</a>
+          </div>
+        </div>
+      </section>
+      <section class="form">
         <h4>{{ $t('page.preferences.advanced') }}</h4>
         <div class="form__fields">
           <div class="form__field">
             <a class="btn btn--text" href="#" @click.prevent="openAppDataLocation"><i class="bi-folder2-open" /> {{ $t('page.preferences.openappdatalocation') }}</a>
+          </div>
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="viewLogs"><i class="bi-clipboard-pulse" /> {{ $t('page.preferences.viewlogs') }}</a>
+          </div>
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="purgeLogs"><i class="bi-clipboard-x" /> {{ $t('page.preferences.purgelogs') }}</a>
+          </div>
+          <div class="form__field">
+            <a class="btn btn--text" href="#" @click.prevent="purgeAllData"><i class="bi-window-x" /> {{ $t('page.preferences.purgealldata') }}</a>
           </div>
         </div>
       </section>
@@ -101,6 +118,10 @@ export default {
       await api.clearRecentViews();
     },
 
+    async clearPins() {
+      await api.clearPins();
+    },
+
     async handleChangeSelect(event, preferenceName) {
       this.preferences[preferenceName] = event.target.value;
 
@@ -115,6 +136,18 @@ export default {
 
     async openAppDataLocation() {
       await api.openAppDataLocation();
+    },
+
+    async viewLogs() {
+      await api.viewLogs();
+    },
+
+    async purgeLogs() {
+      await api.purgeLogs();
+    },
+
+    async purgeAllData() {
+      await api.purgeAllData();
     }
   },
   async mounted() {

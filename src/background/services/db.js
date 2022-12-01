@@ -1,10 +1,9 @@
 const { resolve } = require('path');
 const { mkdirSync } = require('fs');
 const { readFile, writeFile } = require('fs/promises');
-const { isDevelopment, userAppHome } = require('./constants');
+const { isDevelopment, userAppHome, dbFile } = require('../constants');
 
-const dbFileName = 'db.json';
-const dbPath = isDevelopment ? dbFileName : resolve(userAppHome, dbFileName);
+const dbPath = isDevelopment ? dbFile : resolve(userAppHome, dbFile);
 
 if (!isDevelopment) {
   mkdirSync(userAppHome, { recursive: true });

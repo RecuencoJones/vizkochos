@@ -1,10 +1,13 @@
 const { Menu, ipcMain } = require('electron');
 const { instances } = require('./instances');
+const { getDB } = require('./services/db');
 
 const sendToAppWindow = (...data) => instances.get('appWindow').webContents.send(...data);
 
-function createAppMenuTemplate() {
+async function createAppMenuTemplate() {
+  const db = await getDB();
   const i18n = instances.get('i18n');
+  const pinned = db.pinned;
 
   /** @type {Array<import('electron').MenuItemConstructorOptions | import('electron'.MenuItem>} */
   const appMenu = [
@@ -36,6 +39,20 @@ function createAppMenuTemplate() {
           click() {
             sendToAppWindow('app-menu-relay', { command: 'file:contexts' });
           }
+        },
+        { type: 'separator' },
+        {
+          role: 'pinned',
+          label: i18n.t('menu.file.pinned'),
+          submenu: pinned?.length
+            ? pinned.map((pin, index) => ({
+              label: pin.name,
+              accelerator: 'Alt+' + (index + 1),
+              click() {
+                sendToAppWindow('app-menu-relay', { command: 'file:pinned', data: pin });
+              }
+            }))
+            : [{ label: i18n.t('menu.file.empty'), enabled: false }]
         },
         { type: 'separator' },
         {
@@ -81,8 +98,10 @@ function createAppMenuTemplate() {
   return appMenu;
 }
 
-function setMenu() {
-  Menu.setApplicationMenu(Menu.buildFromTemplate(createAppMenuTemplate()));
+async function setMenu() {
+  const menuTemplate = await createAppMenuTemplate();
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
 
 module.exports = { setMenu };

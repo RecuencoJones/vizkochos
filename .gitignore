@@ -1,4 +1,5 @@
 .DS_Store
+.kube
 node_modules
 dist
 out

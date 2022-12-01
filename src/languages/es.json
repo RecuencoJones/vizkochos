@@ -8,7 +8,9 @@
       "newcontext": "Nuevo Contexto",
       "quickstart": "Ir a Inicio rápido",
       "contexts": "Ir a Contextos",
-      "preferences": "Preferencias"
+      "pinned": "Ir al ancla",
+      "preferences": "Preferencias",
+      "empty": "(vacío)"
     },
     "help": {
       "shortcuts": "Atajos de teclado",
@@ -29,8 +31,10 @@
       "viewingithub": "Ver en GitHub"
     },
     "contexts": {
+      "name": "Nombre",
       "addcontext": "Añadir contexto",
-      "choosecontext": "Seleccionar contexto"
+      "choosecontext": "Seleccionar contexto",
+      "nocontexts": "No hay contextos todavía"
     },
     "addcontext": {
       "save": "Guardar",
@@ -81,10 +85,15 @@
       "language": "Idioma",
       "recents": "Recientes",
       "clearrecents": "Borrar vistas recientes",
+      "pins": "Anclas",
+      "clearpins": "Borrar anclados",
       "resourcedetails": "Detalles de recurso",
       "openmanifestbydefault": "Abrir manifesto YAML por defecto",
       "advanced": "Avanzado",
-      "openappdatalocation": "Ver carpeta de aplicación"
+      "openappdatalocation": "Ver carpeta de aplicación",
+      "viewlogs": "Ver logs",
+      "purgelogs": "Purgar logs",
+      "purgealldata": "Purgar todos los datos de aplicación"
     }
   },
   "common": {

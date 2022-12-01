@@ -33,7 +33,11 @@
       <div>
         <section>
           <h4><i class="bi-pin-angle" /> {{ $t('page.home.pinned') }}</h4>
-          <div v-if="pinned"></div>
+          <div v-if="pinned && pinned.length">
+            <div v-for="(pin, index) of pinned" :key="index">
+              <router-link :to="pin.path"><i class="bi-pin" /> {{ pin.name }}</router-link>
+            </div>
+          </div>
           <div v-else><i>{{ $t('page.home.nothingpinned') }}</i></div>
         </section>
         <section>
@@ -59,12 +63,18 @@ export default {
     async loadRecents() {
       this.recents = await api.listRecentViews();
     },
+    async loadPins() {
+      this.pinned = await api.listPins();
+    },
     async openGitHubRepository() {
       await api.openGitHubRepository();
     }
   },
-  mounted() {
-    this.loadRecents();
+  async mounted() {
+    await Promise.all([
+      this.loadRecents(),
+      this.loadPins()
+    ])
   }
 }
 </script>

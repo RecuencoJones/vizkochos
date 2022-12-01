@@ -23,7 +23,8 @@
   "dependencies": {
     "@kubernetes/client-node": "0.17.1",
     "electron-squirrel-startup": "^1.0.0",
-    "i18next": "22.0.6"
+    "i18next": "22.0.6",
+    "winston": "3.8.2"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.3",

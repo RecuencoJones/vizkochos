@@ -36,6 +36,12 @@ async function main() {
       }
     },
     {
+      event: 'file:pinned',
+      handler({ data }) {
+        router.push(data.path);
+      }
+    },
+    {
       event: 'file:preferences',
       handler() {
         router.push('/preferences');

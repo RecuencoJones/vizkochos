@@ -8,20 +8,28 @@
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>{{ $t('page.contexts.name') }}</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="context of contexts" :key="context.name">
-            <td>
-              <router-link :to="'/contexts/' + context.name"><i class="bi-box" /> {{ context.name }}</router-link>
-            </td>
-            <td class="actions">
-              <button class="btn btn--text" @click="deleteContext(context)">
-                <i class="bi-trash" />
-              </button>
-            </td>
+          <template v-if="contexts && contexts.length">
+            <tr v-for="context of contexts" :key="context.name">
+              <td>
+                <router-link :to="'/contexts/' + context.name"><i class="bi-box" /> {{ context.name }}</router-link>
+              </td>
+              <td class="actions">
+                <button class="btn btn--text" @click="pinContext(context)">
+                  <i class="bi-pin-angle" />
+                </button>
+                <button class="btn btn--text" @click="deleteContext(context)">
+                  <i class="bi-trash" />
+                </button>
+              </td>
+            </tr>
+          </template>
+          <tr v-else>
+            <td><i>{{ $t('page.contexts.nocontexts') }}</i></td>
           </tr>
         </tbody>
       </table>
@@ -39,6 +47,13 @@ export default {
   methods: {
     async loadContexts() {
       this.contexts = await api.listContexts();
+    },
+
+    async pinContext(context) {
+      await api.addPin({
+        name: `Context: ${ context.name }`,
+        path: `/contexts/${ context.name }`
+      });
     },
 
     async deleteContext(context) {

@@ -113,6 +113,7 @@ export default {
     context: {
       immediate: true,
       handler() {
+        this.data = null;
         this.loadOverviewData();
       }
     }

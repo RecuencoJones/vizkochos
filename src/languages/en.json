@@ -8,7 +8,9 @@
       "newcontext": "New Context",
       "quickstart": "Go to Quickstart",
       "contexts": "Go to Contexts",
-      "preferences": "Preferences"
+      "pinned": "Go to pin",
+      "preferences": "Preferences",
+      "empty": "(empty)"
     },
     "help": {
       "shortcuts": "View Shortcuts",
@@ -29,8 +31,10 @@
       "viewingithub": "View in GitHub"
     },
     "contexts": {
+      "name": "Name",
       "addcontext": "Add context",
-      "choosecontext": "Choose context"
+      "choosecontext": "Choose context",
+      "nocontexts": "No contexts yet"
     },
     "addcontext": {
       "save": "Save",
@@ -81,10 +85,15 @@
       "language": "Language",
       "recents": "Recents",
       "clearrecents": "Clear recents",
+      "pins": "Pins",
+      "clearpins": "Clear pins",
       "resourcedetails": "Resource Details",
       "openmanifestbydefault": "Open YAML manifest by default",
       "advanced": "Advanced",
-      "openappdatalocation": "Open app data location"
+      "openappdatalocation": "Open app data location",
+      "viewlogs": "View logs",
+      "purgelogs": "Purge logs",
+      "purgealldata": "Purge all app data"
     }
   },
   "common": {
