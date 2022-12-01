@@ -1,4 +1,5 @@
 const { getContextForName, loadKubeConfig, apiForResourceType, methodForResourceType, getLogEmitter, stopLogEmitter } = require('../services/kubernetes');
+const { logger } = require('../logger');
 
 /**
  * @param {import('electron').IpcMain} ipc bus

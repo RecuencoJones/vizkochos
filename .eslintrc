@@ -5,6 +5,27 @@
     "sourceType": "module"
   },
   "rules": {
-    "semi": [ "error", "always" ]
-  }
+    "semi": [ "error", "always" ],
+    "no-undef": "error",
+    "no-unused-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": [ "src/foreground/**/*" ],
+      "env": {
+        "browser": true
+      },
+      "globals": {
+        "api": false
+      }
+    },
+    {
+      "files": [ "src/background/**/*", "*.config.js" ],
+      "env": {
+        "es6": true,
+        "node": true,
+        "commonjs": true
+      }
+    }
+  ]
 }
