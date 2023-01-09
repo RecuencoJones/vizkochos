@@ -44,9 +44,11 @@ export default {
   },
   data() {
     return {
+      preferences: null,
       items: null,
       item: null,
-      filter: null
+      filter: null,
+      autoRefreshTimeout: null
     };
   },
   computed: {
@@ -56,11 +58,17 @@ export default {
       }
 
       return this.items.filter((item) => !this.filter || item.metadata.name.includes(this.filter.toLowerCase()));
+    },
+
+    refreshResourcesListSeconds() {
+      return this.preferences?.refreshResourcesListSeconds || 2;
     }
   },
   methods: {
-    async loadResourceItems() {
-      this.items = null;
+    async loadResourceItems({ silent = false } = {}) {
+      if (!silent) {
+        this.items = null;
+      }
 
       const context = this.context;
       const resource = this.resource;
@@ -74,8 +82,14 @@ export default {
         this.item = this.items.find((item) => itemName === item.metadata.name);
       }
     },
-    async handleRefresh() {
-      await this.loadResourceItems();
+    async handleRefresh(opts) {
+      await this.loadResourceItems(opts);
+    },
+    autoRefresh() {
+      this.autoRefreshTimeout = setTimeout(async () => {
+        await this.handleRefresh({ silent: true });
+        this.autoRefresh();
+      }, this.refreshResourcesListSeconds * 1000);
     },
     handleSelect(item) {
       this.item = item;
@@ -87,8 +101,18 @@ export default {
       async handler() {
         this.item = null;
         await this.loadResourceItems();
+
+        clearTimeout(this.autoRefreshTimeout);
+
+        this.autoRefresh();
       }
     }
+  },
+  async mounted() {
+    this.preferences = await api.getPreferences();
+  },
+  beforeUnmount() {
+    clearTimeout(this.autoRefreshTimeout);
   }
 }
 </script>

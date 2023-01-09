@@ -14,6 +14,7 @@
     },
     "help": {
       "shortcuts": "View Shortcuts",
+      "viewlogs": "View logs",
       "openingithub": "Open in GitHub"
     }
   },
@@ -87,6 +88,8 @@
       "clearrecents": "Clear recents",
       "pins": "Pins",
       "clearpins": "Clear pins",
+      "resourcelist": "Resource List",
+      "refreshresourceslistseconds": "Seconds before refresh",
       "resourcedetails": "Resource Details",
       "openmanifestbydefault": "Open YAML manifest by default",
       "advanced": "Advanced",
@@ -144,6 +147,7 @@
   "tooltip": {
     "close": "Close",
     "preferences": "Preferences",
+    "delete": "Delete",
     "text": "Text",
     "background": "Background",
     "link": "Link",

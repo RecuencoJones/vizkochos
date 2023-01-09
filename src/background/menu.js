@@ -1,5 +1,6 @@
 const { Menu, ipcMain } = require('electron');
 const { instances } = require('./instances');
+const { viewLogs } = require('./logger');
 const { getDB } = require('./services/db');
 
 const sendToAppWindow = (...data) => instances.get('appWindow').webContents.send(...data);
@@ -78,6 +79,14 @@ async function createAppMenuTemplate() {
           accelerator: 'CommandOrControl+/',
           click() {
             sendToAppWindow('app-menu-relay', { command: 'help:shortcuts' });
+          }
+        },
+        {
+          role: 'logs',
+          label: i18n.t('menu.help.viewlogs'),
+          accelerator: 'CommandOrControl+Shift+L',
+          click() {
+            viewLogs();
           }
         },
         {

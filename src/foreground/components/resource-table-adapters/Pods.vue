@@ -9,9 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item of items" :key="item.metadata.uid" @click="handleSelect(item)">
+      <tr v-for="item of items" :key="item.metadata.uid + '-' + item.metadata.creationTimestamp" @click="handleSelect(item)">
         <td>{{ item.metadata.name }}</td>
-        <td>{{ item.status.containerStatuses.filter((c) => c.ready).length }}/{{ item.status.containerStatuses.length }}</td>
+        <td v-if="item.status.containerStatuses">
+          {{ item.status.containerStatuses.filter((c) => c.ready).length }}/{{ item.status.containerStatuses.length }}
+        </td>
+        <td v-else>-/-</td>
         <td>{{ item.status.phase }}</td>
         <td>{{ formatAge(item.metadata.creationTimestamp, $i18n.locale) }}</td>
       </tr>

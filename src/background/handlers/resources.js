@@ -11,9 +11,18 @@ function useResourceHandlers(ipc) {
 
     const client = config.makeApiClient(apiForResourceType[resourceType]);
 
-    const data = await client[methodForResourceType[resourceType]](context.namespace);
+    const data = await client[methodForResourceType[resourceType].list](context.namespace, true);
 
     return data.body.items;
+  });
+
+  ipc.handle('deleteResourceType', async (event, contextName, resourceType, resourceName) => {
+    const context = await getContextForName(contextName);
+    const config = await loadKubeConfig(context);
+
+    const client = config.makeApiClient(apiForResourceType[resourceType]);
+
+    await client[methodForResourceType[resourceType].delete](resourceName, context.namespace);
   });
 
   ipc.handle('subscribeToContainerLogs', async (event, contextName, podName, containerName) => {
@@ -22,7 +31,7 @@ function useResourceHandlers(ipc) {
 
     logger.info(`subscribe to logs:${ context.namespace }:${ podName }:${ containerName }`);
 
-    emitter.on('data', (data) => {
+    emitter?.on('data', (data) => {
       event.sender.send(`logs:${ podName }:${ containerName }`, data);
     });
   });

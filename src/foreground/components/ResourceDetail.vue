@@ -1,7 +1,16 @@
 <template>
   <section class="resource-detail">
-    <button class="btn btn--text" @click="handleClose" :title="$t('tooltip.close')"><i class="bi-x-lg" /></button>
-    <h3>{{ item.metadata.name }}</h3>
+    <header>
+      <nav class="actions">
+        <div class="actions--left">
+          <button class="btn btn--text" @click="handleClose" :title="$t('tooltip.close')"><i class="bi-x-lg" /></button>
+        </div>
+        <div class="actions--right">
+          <button class="btn btn--text" @click="handleDelete" :title="$t('tooltip.delete')"><i class="bi-trash" /></button>
+        </div>
+      </nav>
+      <h3>{{ item.metadata.name }}</h3>
+    </header>
     <details open>
       <summary>
         <strong><i class="bi-card-list" /> {{ $t('page.detail.details') }}</strong>
@@ -83,12 +92,14 @@
 import YAML from 'js-yaml';
 import { DateTime } from 'luxon';
 import { useContext } from '../use/context';
+import { useResource } from '../use/resource';
 import { useClipboard } from '../use/clipboard';
 
 export default {
   setup() {
     return {
       ...useContext(),
+      ...useResource(),
       ...useClipboard()
     };
   },
@@ -126,6 +137,12 @@ export default {
 
     async unsubscribeFromLogs(item) {
       await api.unsubscribeFromContainerLogs(this.context, item.metadata.name, item.spec.containers[0].name);
+    },
+
+    async handleDelete() {
+      await api.deleteResourceType(this.context, this.resource, this.item.metadata.name);
+      await this.close(this.item);
+      this.$emit('close');
     },
 
     async handleClose() {
@@ -179,6 +196,23 @@ export default {
   padding: 1rem;
   background-color: var(--color-detail-background);
   box-shadow: 0 0 3px 0 var(--color-box-shadow);
+
+  .actions {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+    &--left,
+    &--right {
+      flex: 1;
+      display: flex;
+    }
+
+    &--right {
+      justify-content: end;
+    }
+  }
 
   th, summary {
     color: var(--color-detail-title);

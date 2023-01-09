@@ -11,19 +11,58 @@ const { logger } = require('../logger');
 const { getDB, saveDB } = require('./db');
 
 const methodForResourceType = {
-  pods: 'listNamespacedPod',
-  replicasets: 'listNamespacedReplicaSet',
-  deployments: 'listNamespacedDeployment',
-  jobs: 'listNamespacedJob',
-  cronjobs: 'listNamespacedCronJob',
-  configmaps: 'listNamespacedConfigMap',
-  secrets: 'listNamespacedSecret',
-  services: 'listNamespacedService',
-  ingresses: 'listNamespacedIngress',
-  networkpolicies: 'listNamespacedNetworkPolicy',
-  serviceaccounts: 'listNamespacedServiceAccount',
-  roles: 'listNamespacedRole',
-  rolebindings: 'listNamespacedRoleBinding'
+  pods: {
+    list: 'listNamespacedPod',
+    delete: 'deleteNamespacedPod'
+  },
+  replicasets: {
+    list: 'listNamespacedReplicaSet',
+    delete: 'deleteNamespacedReplicaSet'
+  },
+  deployments: {
+    list: 'listNamespacedDeployment',
+    delete: 'deleteNamespacedDeployment'
+  },
+  jobs: {
+    list: 'listNamespacedJob',
+    delete: 'deleteNamespacedJob'
+  },
+  cronjobs: {
+    list: 'listNamespacedCronJob',
+    delete: 'deleteNamespacedCronJob'
+  },
+  configmaps: {
+    list: 'listNamespacedConfigMap',
+    delete: 'deleteNamespacedConfigMap'
+  },
+  secrets: {
+    list: 'listNamespacedSecret',
+    delete: 'deleteNamespacedSecret'
+  },
+  services: {
+    list: 'listNamespacedService',
+    delete: 'deleteNamespacedService'
+  },
+  ingresses: {
+    list: 'listNamespacedIngress',
+    delete: 'deleteNamespacedIngress'
+  },
+  networkpolicies: {
+    list: 'listNamespacedNetworkPolicy',
+    delete: 'deleteNamespacedNetworkPolicy'
+  },
+  serviceaccounts: {
+    list: 'listNamespacedServiceAccount',
+    delete: 'deleteNamespacedServiceAccount'
+  },
+  roles: {
+    list: 'listNamespacedRole',
+    delete: 'deleteNamespacedRole'
+  },
+  rolebindings: {
+    list: 'listNamespacedRoleBinding',
+    delete: 'deleteNamespacedRoleBinding'
+  },
 };
 
 const apiForResourceType = {
@@ -50,6 +89,7 @@ async function attemptRefreshToken(context) {
   try {
     await asyncExec(`kubectl version --user ${context.user} --cluster ${context.cluster}`, {
       env: {
+        ...process.env,
         KUBECONFIG: resolve(context.config)
       }
     });
@@ -128,8 +168,8 @@ class LogsEmitter extends EventEmitter {
   }
 
   stop() {
-    this._stream.destroy();
-    this._request.abort();
+    this._stream?.destroy();
+    this._request?.abort();
   }
 }
 

@@ -27,6 +27,7 @@ contextBridge.exposeInMainWorld('api', {
     'removePin',
     'clearPins',
     'listResourceType',
+    'deleteResourceType',
     'getContextOverview',
     'getPreferences',
     'savePreferences',

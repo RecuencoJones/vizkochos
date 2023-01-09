@@ -28,6 +28,24 @@
         </div>
       </section>
       <section class="form">
+        <h4>{{ $t('page.preferences.resourcelist') }}</h4>
+        <div class="form__fields">
+          <div class="form__field">
+            <div class="form__label">
+              <label for="refreshResourcesListSeconds">{{ $t('page.preferences.refreshresourceslistseconds') }}</label>
+            </div>
+            <div class="form__value">
+              <input
+                class="input--short input--align-right"
+                type="number"
+                name="refreshResourcesListSeconds"
+                :value="preferences.refreshResourcesListSeconds"
+                @input="handleChangeInput($event, 'refreshResourcesListSeconds')">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="form">
         <h4>{{ $t('page.preferences.resourcedetails') }}</h4>
         <div class="form__fields">
           <div class="form__field">
@@ -108,7 +126,8 @@ export default {
       await api.savePreferences({
         theme: this.preferences.theme,
         language: this.preferences.language,
-        openManifestByDefault: this.preferences.openManifestByDefault
+        openManifestByDefault: this.preferences.openManifestByDefault,
+        refreshResourcesListSeconds: this.preferences.refreshResourcesListSeconds
       });
 
       events.emit('reload-preferences');
@@ -120,6 +139,12 @@ export default {
 
     async clearPins() {
       await api.clearPins();
+    },
+
+    async handleChangeInput(event, preferenceName) {
+      this.preferences[preferenceName] = event.target.value;
+
+      await this.savePreferences();
     },
 
     async handleChangeSelect(event, preferenceName) {

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { resolve } = require('path');
+const { shell } = require('electron');
 const { createLogger, transports, format } = require('winston');
 const { userAppHome, logFile } = require('./constants');
 
@@ -16,10 +17,14 @@ const logger = createLogger({
   ]
 });
 
+async function viewLogs() {
+  await shell.openPath(resolve(userAppHome, logFile));
+}
+
 async function purgeLogs() {
   try {
     await fs.promises.unlink(filename);
   } catch {}
 }
 
-module.exports = { logger, purgeLogs };
+module.exports = { logger, viewLogs, purgeLogs };

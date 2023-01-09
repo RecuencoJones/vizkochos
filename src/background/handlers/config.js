@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const { readdir } = require('fs/promises');
-const { KubeConfig } = require("@kubernetes/client-node");
+const { KubeConfig } = require('@kubernetes/client-node');
 const { kubeDir } = require('../constants');
 
 /**

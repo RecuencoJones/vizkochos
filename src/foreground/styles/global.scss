@@ -94,6 +94,14 @@ input {
   }
 }
 
+.input--short {
+  width: 3rem;
+}
+
+.input--align-right {
+  text-align: right;
+}
+
 .form {
   .form__field {
     display: flex;

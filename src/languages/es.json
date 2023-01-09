@@ -14,6 +14,7 @@
     },
     "help": {
       "shortcuts": "Atajos de teclado",
+      "viewlogs": "Ver logs",
       "openingithub": "Abrir en GitHub"
     }
   },
@@ -87,6 +88,8 @@
       "clearrecents": "Borrar vistas recientes",
       "pins": "Anclas",
       "clearpins": "Borrar anclados",
+      "resourcelist": "Lista de recursos",
+      "refreshresourceslistseconds": "Segundos antes de actualizar",
       "resourcedetails": "Detalles de recurso",
       "openmanifestbydefault": "Abrir manifesto YAML por defecto",
       "advanced": "Avanzado",
@@ -144,6 +147,7 @@
   "tooltip": {
     "close": "Cerrar",
     "preferences": "Preferencias",
+    "delete": "Borrar",
     "text": "Texto",
     "background": "Fondo",
     "link": "Enlace",

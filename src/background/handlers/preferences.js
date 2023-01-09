@@ -1,10 +1,15 @@
-const { resolve } = require('path');
 const { shell } = require('electron');
 const { setMenu } = require('../menu');
 const { getDB, saveDB } = require('../services/db');
 const { reloadLanguage } = require('../services/languages');
-const { userAppHome, logFile } = require('../constants');
-const { purgeLogs } = require('../logger');
+const { userAppHome } = require('../constants');
+const { purgeLogs, viewLogs } = require('../logger');
+
+function withDefaultPreferences(data = {}) {
+  data.refreshResourcesListSeconds ??= 2;
+
+  return data;
+}
 
 /**
  * @param {import('electron').IpcMain} ipc bus
@@ -13,7 +18,7 @@ function usePreferenceHandlers(ipc) {
   ipc.handle('getPreferences', async () => {
     const db = await getDB();
 
-    return db.preferences || {};
+    return withDefaultPreferences(db.preferences || {});
   });
 
   ipc.handle('savePreferences', async (event, data) => {
@@ -28,7 +33,9 @@ function usePreferenceHandlers(ipc) {
   });
 
   ipc.handle('openAppDataLocation', () => shell.openPath(userAppHome));
-  ipc.handle('viewLogs', () => shell.openPath(resolve(userAppHome, logFile)));
+  ipc.handle('viewLogs', async () => {
+    await viewLogs();
+  });
   ipc.handle('purgeLogs', async () => {
     await purgeLogs();
   });
