@@ -11,6 +11,10 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+if (process.platform === 'darwin') {
+  require('fix-path')();
+}
+
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const window = new BrowserWindow({
